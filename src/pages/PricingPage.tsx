@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { CheckCircle2, Zap, Phone, Building2, Code2, ArrowRight } from 'lucide-react';
+import { CheckCircle2, Zap, Phone, Code2, ArrowRight } from 'lucide-react';
 
 const GOLD = '#E8B84B';
 const DARK = '#1a1a1a';

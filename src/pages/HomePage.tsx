@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { TypeAnimation } from 'react-type-animation';
 import {
-  GraduationCap, DollarSign, BarChart3, MessageSquare, Users, BookOpen,
+  DollarSign, BarChart3, Users, BookOpen,
   Smartphone, Brain, Bell, Shield, CheckCircle2, ArrowRight, Phone,
   TrendingUp, Layers, UserCheck, Calendar, FileText, Zap,
 } from 'lucide-react';
