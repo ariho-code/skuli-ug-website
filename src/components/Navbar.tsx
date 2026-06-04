@@ -107,30 +107,46 @@ export default function Navbar() {
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden overflow-hidden"
-            style={{ background: 'rgba(26,26,26,0.98)', borderBottom: '1px solid rgba(255,255,255,0.07)' }}
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.18, ease: 'easeOut' }}
+            className="md:hidden"
+            style={{ background: '#1a1a1a', borderBottom: '1px solid rgba(255,255,255,0.08)' }}
           >
-            <div className="px-5 py-4 space-y-0.5">
-              {links.map(l => (
-                <Link key={l.href} to={l.href}
-                  className="block px-4 py-3 rounded-xl text-sm font-medium transition-all"
-                  style={{
-                    color: pathname === l.href ? GOLD : 'rgba(255,255,255,0.75)',
-                    background: pathname === l.href ? 'rgba(232,184,75,0.08)' : 'transparent',
-                  }}>
-                  {l.label}
-                </Link>
-              ))}
-              <div className="pt-4 flex flex-col gap-2">
+            <div className="px-4 pt-2 pb-5">
+              {/* Nav links */}
+              <div className="space-y-0.5">
+                {links.map(l => (
+                  <Link key={l.href} to={l.href}
+                    className="flex items-center justify-between px-4 py-3.5 rounded-xl text-sm font-medium transition-all"
+                    style={{
+                      color: pathname === l.href ? GOLD : 'rgba(255,255,255,0.8)',
+                      background: pathname === l.href ? 'rgba(232,184,75,0.1)' : 'transparent',
+                    }}>
+                    {l.label}
+                    {pathname === l.href && (
+                      <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: GOLD }} />
+                    )}
+                  </Link>
+                ))}
+              </div>
+
+              {/* Divider */}
+              <div className="my-4" style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }} />
+
+              {/* CTA Buttons */}
+              <div className="flex flex-col gap-2.5">
                 <a href={`${APP_URL}/login`}
-                  className="block text-center px-4 py-3 text-sm font-medium rounded-xl"
-                  style={{ color: 'rgba(255,255,255,0.7)', border: '1px solid rgba(255,255,255,0.12)' }}>Log in</a>
+                  className="flex items-center justify-center px-4 py-3.5 text-sm font-semibold rounded-xl transition-all"
+                  style={{ color: 'rgba(255,255,255,0.85)', border: '1px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.04)' }}>
+                  Log in to your school
+                </a>
                 <a href={`${APP_URL}/login`}
-                  className="block text-center px-4 py-3 text-sm font-bold rounded-xl"
-                  style={{ background: GOLD, color: DARK }}>Get Started Free</a>
+                  className="flex items-center justify-center px-4 py-3.5 text-sm font-bold rounded-xl transition-all"
+                  style={{ background: GOLD, color: DARK }}>
+                  Get Started Free →
+                </a>
               </div>
             </div>
           </motion.div>
