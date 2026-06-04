@@ -13,7 +13,7 @@ export default function Footer() {
   return (
     <footer style={{ background: DARK, borderTop: '1px solid rgba(255,255,255,0.07)' }}>
       <div className="max-w-7xl mx-auto px-5 lg:px-8 py-14">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
 
           {/* Brand */}
           <div className="lg:col-span-1">
@@ -93,6 +93,21 @@ export default function Footer() {
             </ul>
           </div>
 
+          {/* Legal */}
+          <div>
+            <h3 className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: GOLD }}>Legal</h3>
+            <ul className="space-y-2.5">
+              {[
+                { to: '/terms', label: 'Terms of Service' },
+                { to: '/privacy', label: 'Privacy Policy' },
+              ].map(l => (
+                <li key={l.label}>
+                  <Link to={l.to} className="text-sm text-white/50 hover:text-white transition-colors">{l.label}</Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
           {/* Newsletter */}
           <div>
             <h3 className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: GOLD }}>Stay Updated</h3>
@@ -110,9 +125,11 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/30"
           style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
-          <p>&copy; {new Date().getFullYear()} Skuli UG. All rights reserved. Built in Uganda.</p>
+          <p>&copy; {new Date().getFullYear()} Skuli UG · Uganda School Management System. All rights reserved. Built in Uganda 🇺🇬</p>
           <div className="flex items-center gap-4">
-            <span>Receipts &amp; invoices: <span style={{ color: GOLD }}>{SALES_EMAIL}</span></span>
+            <Link to="/terms" className="hover:text-white/70 transition-colors">Terms</Link>
+            <Link to="/privacy" className="hover:text-white/70 transition-colors">Privacy</Link>
+            <span>Receipts: <span style={{ color: GOLD }}>{SALES_EMAIL}</span></span>
           </div>
         </div>
       </div>
