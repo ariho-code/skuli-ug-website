@@ -1,17 +1,14 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { BookOpen, Upload, FileText, MessageSquare, CheckCircle2, Smartphone, Users, Award, ArrowRight } from 'lucide-react';
+import { BookOpen, Upload, FileText, MessageSquare, CheckCircle2, Smartphone, Users, Award, ArrowUpRight } from 'lucide-react';
 
-const GOLD = '#E8B84B';
-const DARK = '#1a1a1a';
-
-function FadeIn({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
+function Reveal({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.07 });
   return (
-    <motion.div ref={ref} initial={{ opacity: 0, y: 22 }}
+    <motion.div ref={ref} initial={{ opacity: 0, y: 18 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] }}
       className={className}>
       {children}
     </motion.div>
@@ -19,150 +16,143 @@ function FadeIn({ children, delay = 0, className = '' }: { children: React.React
 }
 
 const features = [
-  { icon: Upload, title: 'Share lesson notes', desc: 'Upload PDFs, Word documents, images and videos. Pupils access everything from their phones.' },
-  { icon: FileText, title: 'Digital assignments', desc: 'Set homework digitally. Pupils submit online. Teachers mark and return feedback without paper.' },
-  { icon: MessageSquare, title: 'Discussion boards', desc: 'Class-level discussions where teachers guide learning and pupils ask questions.' },
-  { icon: BookOpen, title: 'Lesson library', desc: 'All lessons organised by subject and topic. Pupils catch up at any time, even during holidays.' },
-  { icon: Award, title: 'Progress tracking', desc: 'Teachers see which pupils have viewed materials and submitted assignments.' },
-  { icon: Users, title: 'Class groups', desc: 'Each class has its own e-learning space. Teachers only manage their assigned classes.' },
+  { icon: Upload,        title: 'Share lesson notes',     desc: 'Upload PDFs, Word docs, images and videos. Pupils access everything from their phones.' },
+  { icon: FileText,      title: 'Digital assignments',    desc: 'Set homework digitally. Pupils submit online. Teachers mark and return feedback — no paper.' },
+  { icon: MessageSquare, title: 'Discussion boards',      desc: 'Class-level discussions where teachers guide learning and pupils ask questions.' },
+  { icon: BookOpen,      title: 'Lesson library',         desc: 'All lessons organised by subject and topic. Pupils catch up any time, even during holidays.' },
+  { icon: Award,         title: 'Progress tracking',      desc: 'Teachers see which pupils have viewed materials and submitted assignments.' },
+  { icon: Users,         title: 'Class groups',           desc: 'Each class has its own e-learning space. Teachers only manage their assigned classes.' },
 ];
 
 const steps = [
-  { num: '01', title: 'Teacher uploads materials', desc: 'Notes, PDFs or videos uploaded from any smartphone in seconds.' },
-  { num: '02', title: 'Pupils access on their phones', desc: 'Students open the Skuli UG app on their phone and see new lessons immediately.' },
-  { num: '03', title: 'Assignments set and submitted', desc: 'Teachers post assignments. Pupils submit online. No printing, no lost exercise books.' },
-  { num: '04', title: 'Teachers mark and give feedback', desc: 'Feedback returned digitally. Marks recorded in the grade book automatically.' },
+  { num: '01', title: 'Teacher uploads materials',    desc: 'Notes, PDFs or videos uploaded from any smartphone in seconds.' },
+  { num: '02', title: 'Pupils access on their phones',desc: 'Pupils open the Skuli UG app and see new lessons immediately.' },
+  { num: '03', title: 'Assignments set and submitted',desc: 'Teachers post assignments. Pupils submit online. No printing, no lost exercise books.' },
+  { num: '04', title: 'Marked & feedback returned',   desc: 'Feedback returned digitally. Marks recorded in the grade book automatically.' },
 ];
 
 export default function ElearningPage() {
   return (
-    <div style={{ background: DARK, color: '#fff', paddingTop: 68 }}>
+    <div className="bg-paper text-ink" style={{ paddingTop: 72 }}>
 
       {/* Hero */}
-      <section className="py-24" style={{ background: DARK }}>
-        <div className="max-w-5xl mx-auto px-5 grid lg:grid-cols-2 gap-12 items-center">
-          <FadeIn>
-            <div className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: GOLD }}>E-Learning Module</div>
-            <h1 className="text-5xl font-extrabold text-white mb-5 leading-tight">
+      <section className="relative py-24 paper-grain overflow-hidden">
+        <div aria-hidden className="absolute -top-32 -right-24 w-[520px] h-[520px] rounded-full opacity-40 pointer-events-none drift"
+          style={{ background: 'radial-gradient(closest-side, rgba(200,147,46,0.22), transparent 70%)' }} />
+        <div className="relative max-w-6xl mx-auto px-5 grid lg:grid-cols-[1.1fr_1fr] gap-12 items-center">
+          <Reveal>
+            <div className="eyebrow mb-5">E-learning module</div>
+            <h1 className="font-display text-[clamp(2.6rem,5.8vw,4.6rem)] leading-[1.0] tracking-tightest text-ink mb-6">
               Learning that doesn't stop<br />
-              <span style={{ color: GOLD }}>when school closes</span>
+              <span className="font-display-italic text-gold">when school closes.</span>
             </h1>
-            <p className="text-white/60 text-lg leading-relaxed mb-8">
-              Skuli UG's built-in e-learning module lets teachers share notes, set assignments and give feedback — all from their smartphones. Pupils access everything without a computer.
+            <p className="text-[17px] text-muted leading-relaxed mb-8 max-w-xl">
+              Skuli UG's built-in e-learning module lets teachers share notes, set assignments and
+              give feedback — all from their smartphones. Pupils access everything without a computer.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
-              <Link to="/contact"
-                className="flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-bold transition-all"
-                style={{ background: GOLD, color: DARK }}
-                onMouseEnter={e => (e.currentTarget.style.background = '#d4a017')}
-                onMouseLeave={e => (e.currentTarget.style.background = GOLD)}>
-                Book a Demo <ArrowRight className="w-4 h-4" />
+              <Link to="/contact" className="btn btn-primary">
+                Book a demo <ArrowUpRight className="w-4 h-4" />
               </Link>
-              <Link to="/pricing"
-                className="flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold transition-all"
-                style={{ background: 'rgba(255,255,255,0.06)', color: '#fff', border: '1px solid rgba(255,255,255,0.12)' }}
-                onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.1)')}
-                onMouseLeave={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.06)')}>
-                View Pricing
+              <Link to="/pricing" className="btn btn-ghost">
+                View pricing
               </Link>
             </div>
-          </FadeIn>
-          <FadeIn delay={0.15}>
+          </Reveal>
+          <Reveal delay={0.12}>
             <div className="grid grid-cols-2 gap-3">
               {[
-                { label: 'Mobile access', sub: 'Any Android or iPhone', icon: Smartphone },
-                { label: 'No computer needed', sub: 'Works on 3G/4G data', icon: CheckCircle2 },
-                { label: 'All subjects', sub: 'Organised by class & topic', icon: BookOpen },
-                { label: 'Holiday learning', sub: 'Pupils study from home', icon: Users },
+                { label: 'Mobile access',     sub: 'Any Android or iPhone',     icon: Smartphone },
+                { label: 'No computer needed', sub: 'Works on 3G/4G data',       icon: CheckCircle2 },
+                { label: 'All subjects',       sub: 'Organised by class & topic', icon: BookOpen },
+                { label: 'Holiday learning',   sub: 'Pupils study from home',    icon: Users },
               ].map(stat => (
-                <div key={stat.label} className="rounded-2xl p-5" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)' }}>
-                  <stat.icon className="w-5 h-5 mb-3" style={{ color: GOLD }} />
-                  <div className="font-bold text-white text-sm">{stat.label}</div>
-                  <div className="text-xs text-white/40 mt-0.5">{stat.sub}</div>
+                <div key={stat.label} className="card bg-paper-2">
+                  <stat.icon className="w-5 h-5 mb-3 text-gold" />
+                  <div className="font-display text-[16px] font-semibold tracking-tight text-ink">{stat.label}</div>
+                  <div className="text-[12.5px] text-muted mt-0.5">{stat.sub}</div>
                 </div>
               ))}
             </div>
-          </FadeIn>
+          </Reveal>
         </div>
       </section>
 
       {/* Features */}
-      <section className="py-20" style={{ background: '#111' }}>
-        <div className="max-w-7xl mx-auto px-5 lg:px-8">
-          <FadeIn className="mb-12">
-            <div className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: GOLD }}>Features</div>
-            <h2 className="text-3xl font-extrabold text-white">Everything the e-learning module includes</h2>
-          </FadeIn>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <section className="py-20 bg-paper-2 border-y border-[color:var(--line)]">
+        <div className="max-w-6xl mx-auto px-5 lg:px-8">
+          <Reveal className="mb-12 max-w-2xl">
+            <div className="eyebrow mb-4">Features</div>
+            <h2 className="font-display text-[clamp(1.8rem,4vw,2.6rem)] leading-tight tracking-tightest text-ink">
+              Everything the e-learning module includes.
+            </h2>
+          </Reveal>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {features.map((f, i) => (
-              <FadeIn key={f.title} delay={i * 0.07}>
-                <motion.div whileHover={{ y: -4 }}
-                  className="rounded-2xl p-6 transition-all"
-                  style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)' }}
-                  onMouseEnter={e => (e.currentTarget.style.borderColor = 'rgba(232,184,75,0.3)')}
-                  onMouseLeave={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)')}>
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-4" style={{ background: 'rgba(232,184,75,0.1)' }}>
-                    <f.icon className="w-5 h-5" style={{ color: GOLD }} />
+              <Reveal key={f.title} delay={i * 0.06}>
+                <motion.div whileHover={{ y: -3 }} transition={{ duration: 0.2 }} className="card h-full bg-paper">
+                  <div className="w-11 h-11 rounded-xl flex items-center justify-center mb-5 bg-paper-2 border border-[color:var(--line)]">
+                    <f.icon className="w-5 h-5 text-gold" />
                   </div>
-                  <h3 className="font-bold text-white mb-2">{f.title}</h3>
-                  <p className="text-sm text-white/50 leading-relaxed">{f.desc}</p>
+                  <h3 className="font-display text-[18px] font-semibold tracking-tight text-ink mb-2">{f.title}</h3>
+                  <p className="text-[14px] text-muted leading-relaxed">{f.desc}</p>
                 </motion.div>
-              </FadeIn>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* How it works */}
-      <section className="py-20" style={{ background: DARK }}>
+      {/* Steps */}
+      <section className="py-20">
         <div className="max-w-4xl mx-auto px-5">
-          <FadeIn className="mb-12">
-            <div className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: GOLD }}>How It Works</div>
-            <h2 className="text-3xl font-extrabold text-white">From teacher to pupil in 4 steps</h2>
-          </FadeIn>
-          <div className="space-y-4">
+          <Reveal className="mb-12 max-w-2xl">
+            <div className="eyebrow mb-4">How it works</div>
+            <h2 className="font-display text-[clamp(1.8rem,4vw,2.6rem)] leading-tight tracking-tightest text-ink">
+              From teacher to pupil, in four steps.
+            </h2>
+          </Reveal>
+          <div className="space-y-3">
             {steps.map((step, i) => (
-              <FadeIn key={step.num} delay={i * 0.08}>
-                <div className="flex items-start gap-6 rounded-2xl p-6"
-                  style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
-                  <div className="text-4xl font-extrabold flex-shrink-0" style={{ color: 'rgba(232,184,75,0.25)' }}>{step.num}</div>
+              <Reveal key={step.num} delay={i * 0.06}>
+                <div className="flex items-start gap-6 rounded-2xl p-6 bg-paper-2 border border-[color:var(--line)]">
+                  <div className="font-display text-[44px] font-semibold leading-none flex-shrink-0 text-gold/40">
+                    {step.num}
+                  </div>
                   <div>
-                    <h3 className="font-bold text-white mb-1">{step.title}</h3>
-                    <p className="text-sm text-white/55">{step.desc}</p>
+                    <h3 className="font-display text-[19px] font-semibold tracking-tight text-ink mb-1">{step.title}</h3>
+                    <p className="text-[14px] text-muted leading-relaxed">{step.desc}</p>
                   </div>
                 </div>
-              </FadeIn>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Plan availability */}
-      <section className="py-16" style={{ background: '#111' }}>
+      {/* CTA */}
+      <section className="py-20 bg-ink text-paper-2">
         <div className="max-w-3xl mx-auto px-5 text-center">
-          <FadeIn>
-            <div className="inline-block px-4 py-2 rounded-full text-xs font-bold mb-5" style={{ background: 'rgba(232,184,75,0.1)', color: GOLD, border: '1px solid rgba(232,184,75,0.2)' }}>
-              Available on Growth, Pro and Enterprise plans
+          <Reveal>
+            <div className="inline-block px-3 py-1.5 rounded-full text-[11.5px] font-semibold tracking-wider uppercase mb-5"
+              style={{ background: 'rgba(232,195,107,0.12)', color: 'var(--gold-soft)', border: '1px solid rgba(232,195,107,0.25)' }}>
+              Available on Growth, Pro and Enterprise
             </div>
-            <h2 className="text-3xl font-extrabold text-white mb-4">Ready to go digital?</h2>
-            <p className="text-white/55 mb-8">E-learning is included from the Growth plan — from UGX 300,000 per term.</p>
+            <h2 className="font-display text-[clamp(2rem,4.6vw,3rem)] leading-tight tracking-tightest mb-5">
+              Ready to go digital?
+            </h2>
+            <p className="text-[16px] text-paper-3/75 mb-9">
+              E-learning is included from the Growth plan — from UGX 300,000 per term.
+            </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <Link to="/pricing"
-                className="flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-bold transition-all"
-                style={{ background: GOLD, color: DARK }}
-                onMouseEnter={e => (e.currentTarget.style.background = '#d4a017')}
-                onMouseLeave={e => (e.currentTarget.style.background = GOLD)}>
-                See Pricing <ArrowRight className="w-4 h-4" />
+              <Link to="/pricing" className="btn" style={{ background: 'var(--gold)', color: '#1A1611' }}>
+                See pricing <ArrowUpRight className="w-4 h-4" />
               </Link>
-              <Link to="/contact"
-                className="flex items-center justify-center gap-2 px-7 py-3.5 rounded-xl font-semibold transition-all"
-                style={{ background: 'rgba(255,255,255,0.06)', color: '#fff', border: '1px solid rgba(255,255,255,0.12)' }}
-                onMouseEnter={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.1)')}
-                onMouseLeave={e => (e.currentTarget.style.background = 'rgba(255,255,255,0.06)')}>
-                Contact Us
+              <Link to="/contact" className="btn btn-dark-on-dark">
+                Contact us
               </Link>
             </div>
-          </FadeIn>
+          </Reveal>
         </div>
       </section>
     </div>
