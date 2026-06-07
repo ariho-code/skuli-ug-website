@@ -17,20 +17,12 @@ export default function Footer() {
 
           {/* Brand */}
           <div className="lg:col-span-1">
-            <div className="flex items-center gap-3 mb-4">
+            <div className="mb-5">
               <img
                 src="/skuli-logo.png"
                 alt="Skuli UG"
-                className="h-11 w-auto object-contain"
+                className="h-14 w-auto object-contain"
               />
-              <div>
-                <div className="font-extrabold text-base leading-none text-white">
-                  Skuli <span style={{ color: GOLD }}>UG</span>
-                </div>
-                <div className="text-[9px] tracking-[0.2em] uppercase font-semibold" style={{ color: 'rgba(255,255,255,0.35)' }}>
-                  Uganda School Management
-                </div>
-              </div>
             </div>
             <p className="text-sm text-white/45 leading-relaxed mb-5">
               The all-in-one school management platform built for Uganda's primary schools.

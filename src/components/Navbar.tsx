@@ -18,20 +18,12 @@ const links = [
 
 function SkuliLogo({ dark: _dark = false }: { dark?: boolean }) {
   return (
-    <Link to="/" className="flex items-center gap-3 group" aria-label="Skuli UG Home">
+    <Link to="/" className="flex items-center group" aria-label="Skuli UG Home">
       <img
         src="/skuli-logo.png"
         alt="Skuli UG"
-        className="h-10 w-auto object-contain drop-shadow-md transition-transform duration-200 group-hover:scale-105"
+        className="h-12 w-auto object-contain drop-shadow-lg transition-transform duration-200 group-hover:scale-105"
       />
-      <div>
-        <div className="font-extrabold text-lg leading-none text-white">
-          Skuli <span style={{ color: GOLD }}>UG</span>
-        </div>
-        <div className="text-[9px] tracking-[0.2em] uppercase font-semibold" style={{ color: 'rgba(255,255,255,0.4)' }}>
-          Uganda School Management
-        </div>
-      </div>
     </Link>
   );
 }
