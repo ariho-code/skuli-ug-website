@@ -3,38 +3,135 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Skuli UG — School Management System for Uganda | EduPrime</title>
-    <meta name="description" content="Skuli UG is Uganda's most advanced school management platform. Manage students, fees, academics, e-learning, parent portals, chat, AI and more. Built for African schools." />
-    <meta name="keywords" content="school management system Uganda, school ERP Uganda, student management software Uganda, fees management school Uganda, e-learning Uganda, school portal Uganda, Skuli UG, EduPrime" />
+
+    <!-- ═══ Favicon & PWA icons ═══════════════════════════════════════ -->
+    <link rel="icon" type="image/png" href="/skuli-logo.png" />
+    <link rel="apple-touch-icon" sizes="192x192" href="/icon-192.png" />
+    <link rel="apple-touch-icon" sizes="512x512" href="/icon-512.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Skuli UG" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="theme-color" content="#1a1a1a" />
+
+    <!-- ═══ Primary SEO ════════════════════════════════════════════════ -->
+    <title>Skuli UG — #1 School Management System in Uganda</title>
+    <meta name="description" content="Skuli UG is Uganda's leading school management system. Digitise report cards, fees, marks, e-learning and attendance — all on your phone. Trusted by primary schools across Uganda." />
+    <meta name="keywords" content="school management system Uganda, school software Uganda, primary school management Uganda, Uganda school fees software, report card software Uganda, student management system Uganda, school ERP Uganda, e-learning Uganda primary school, school portal Uganda, Uganda school app, report cards Uganda, PLE results Uganda, school fees tracker Uganda, headteacher software Uganda, Kampala school management, best school management system, affordable school software Uganda, Skuli UG" />
     <meta name="author" content="Skuli UG" />
-    <meta name="robots" content="index, follow" />
-    <link rel="canonical" href="https://skuli.ug/" />
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+    <link rel="canonical" href="https://skuliug.com/" />
+
+    <!-- ═══ Open Graph ══════════════════════════════════════════════════ -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://skuli.ug/" />
-    <meta property="og:title" content="Skuli UG — School Management System for Uganda" />
-    <meta property="og:description" content="The all-in-one school management platform built for Ugandan schools. Fees, academics, e-learning, parent access, AI assistant and more." />
-    <meta property="og:image" content="https://skuli.ug/og-image.png" />
+    <meta property="og:url" content="https://skuliug.com/" />
+    <meta property="og:title" content="Skuli UG — #1 School Management System in Uganda" />
+    <meta property="og:description" content="Uganda's leading school management platform. AI report cards, fees tracking, marks, e-learning and analytics — all on your teachers' phones. Starting at UGX 150,000/term." />
+    <meta property="og:image" content="https://skuliug.com/skuli-logo.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:site_name" content="Skuli UG" />
+    <meta property="og:locale" content="en_UG" />
+
+    <!-- ═══ Twitter / X Card ══════════════════════════════════════════ -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Skuli UG — School Management System" />
-    <meta name="twitter:description" content="Uganda's most advanced school management platform. Built for African schools." />
-    <meta name="twitter:image" content="https://skuli.ug/og-image.png" />
+    <meta name="twitter:site" content="@skuliug" />
+    <meta name="twitter:title" content="Skuli UG — School Management System Uganda" />
+    <meta name="twitter:description" content="Uganda's leading school management platform. AI report cards, fees, marks, e-learning — on your phone. Starting UGX 150,000/term." />
+    <meta name="twitter:image" content="https://skuliug.com/skuli-logo.png" />
+
+    <!-- ═══ Geo & Language targeting ══════════════════════════════════ -->
+    <meta name="geo.region" content="UG" />
+    <meta name="geo.placename" content="Kampala, Uganda" />
+    <meta name="geo.position" content="0.3476;32.5825" />
+    <meta name="ICBM" content="0.3476, 32.5825" />
+    <meta name="language" content="English" />
+    <meta name="revisit-after" content="7 days" />
+
+    <!-- ═══ Schema.org Structured Data ════════════════════════════════ -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "Skuli UG",
-      "applicationCategory": "EducationApplication",
-      "operatingSystem": "Web",
-      "url": "https://skuli.ug",
-      "description": "All-in-one school management system for Ugandan schools.",
-      "author": { "@type": "Organization", "name": "Skuli UG", "url": "https://skuli.ug" }
+      "@graph": [
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://skuliug.com/#software",
+          "name": "Skuli UG",
+          "alternateName": "Skuli Uganda School Management",
+          "applicationCategory": "EducationApplication",
+          "applicationSubCategory": "School Management System",
+          "operatingSystem": "Web, Android, iOS",
+          "url": "https://skuliug.com",
+          "downloadUrl": "https://primary.skuliug.com",
+          "description": "Uganda's leading school management system. Manage report cards, fees, marks, e-learning, attendance and AI comments — all on mobile.",
+          "screenshot": "https://skuliug.com/skuli-logo.png",
+          "offers": {
+            "@type": "Offer",
+            "price": "150000",
+            "priceCurrency": "UGX",
+            "description": "Starting from UGX 150,000 per term for schools under 150 pupils"
+          },
+          "author": {
+            "@type": "Organization",
+            "name": "Skuli UG",
+            "url": "https://skuliug.com",
+            "logo": "https://skuliug.com/skuli-logo.png",
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "telephone": "+256760730254",
+              "contactType": "sales",
+              "areaServed": "UG",
+              "availableLanguage": "English"
+            },
+            "address": {
+              "@type": "PostalAddress",
+              "addressCountry": "UG",
+              "addressLocality": "Kampala"
+            }
+          },
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "reviewCount": "48"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is the best school management system in Uganda?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Skuli UG is Uganda's leading school management system, designed specifically for Ugandan primary schools. It includes report cards, fees tracking, marks, e-learning, AI comments and mobile access."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How much does school management software cost in Uganda?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Skuli UG starts at UGX 150,000 per term for schools under 150 pupils — less than the cost of printing report cards. Plans go up to UGX 500,000/term for large schools."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can teachers use school software on their phones in Uganda?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Skuli UG is fully mobile-first. Teachers can enter marks, view class lists, and generate report cards directly from their Android or iPhone — no computer needed."
+              }
+            }
+          ]
+        }
+      ]
     }
     </script>
+
+    <!-- ═══ Fonts ═══════════════════════════════════════════════════════ -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,300..900,0..100,0..1&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
   </head>
   <body>
     <div id="root"></div>

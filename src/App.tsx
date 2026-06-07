@@ -17,7 +17,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <div className="min-h-screen bg-white font-sans text-slate-800 overflow-x-hidden">
+      <div className="min-h-screen bg-paper font-sans text-ink antialiased overflow-x-hidden">
         <Navbar />
         <main>
           <Routes>

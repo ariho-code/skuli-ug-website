@@ -1,4 +1,10 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://skuli.ug/sitemap.xml
+Sitemap: https://skuliug.com/sitemap.xml
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
