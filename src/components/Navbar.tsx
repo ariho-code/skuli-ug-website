@@ -16,13 +16,13 @@ const links = [
   { href: '/contact', label: 'Contact' },
 ];
 
-function SkuliLogo({ dark: _dark = false }: { dark?: boolean }) {
+function SkuliLogo() {
   return (
     <Link to="/" className="flex items-center group" aria-label="Skuli UG Home">
       <img
         src="/skuli-logo.png"
         alt="Skuli UG"
-        className="h-12 w-auto object-contain drop-shadow-lg transition-transform duration-200 group-hover:scale-105"
+        className="h-16 w-auto object-contain drop-shadow-xl transition-transform duration-200 group-hover:scale-105"
       />
     </Link>
   );
@@ -43,16 +43,21 @@ export default function Navbar() {
 
   useEffect(() => { setOpen(false); }, [pathname]);
 
-  const isHeroPage = pathname === '/';
+  // Always use dark background for visibility
   const navBg = scrolled
-    ? 'rgba(26,26,26,0.97)'
-    : isHeroPage ? 'transparent' : 'rgba(26,26,26,1)';
+    ? 'rgba(26,26,26,0.98)'
+    : 'rgba(26,26,26,0.95)';
 
   return (
     <header className="fixed top-0 inset-x-0 z-50 transition-all duration-300"
-      style={{ background: navBg, backdropFilter: scrolled ? 'blur(12px)' : 'none', borderBottom: scrolled ? '1px solid rgba(255,255,255,0.07)' : 'none' }}>
+      style={{ 
+        background: navBg, 
+        backdropFilter: 'blur(12px)', 
+        borderBottom: '1px solid rgba(255,255,255,0.1)',
+        boxShadow: scrolled ? '0 4px 20px rgba(0,0,0,0.3)' : '0 2px 10px rgba(0,0,0,0.2)'
+      }}>
       <nav className="max-w-7xl mx-auto px-5 lg:px-8 h-[68px] flex items-center justify-between">
-        <SkuliLogo dark />
+        <SkuliLogo />
 
         {/* Desktop links */}
         <ul className="hidden md:flex items-center gap-1">

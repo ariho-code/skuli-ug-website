@@ -21,7 +21,7 @@ export default function Footer() {
               <img
                 src="/skuli-logo.png"
                 alt="Skuli UG"
-                className="h-14 w-auto object-contain"
+                className="h-16 w-auto object-contain drop-shadow-lg"
               />
             </div>
             <p className="text-sm text-white/45 leading-relaxed mb-5">
