@@ -16,20 +16,19 @@ const links = [
   { href: '/contact', label: 'Contact' },
 ];
 
-function SkuliLogo({ dark = false }: { dark?: boolean }) {
+function SkuliLogo({ dark: _dark = false }: { dark?: boolean }) {
   return (
-    <Link to="/" className="flex items-center gap-2.5 group">
-      <div className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
-        style={{ background: GOLD }}>
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={DARK} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-          <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
-        </svg>
-      </div>
+    <Link to="/" className="flex items-center gap-3 group" aria-label="Skuli UG Home">
+      <img
+        src="/skuli-logo.png"
+        alt="Skuli UG"
+        className="h-10 w-auto object-contain drop-shadow-md transition-transform duration-200 group-hover:scale-105"
+      />
       <div>
-        <div className="font-extrabold text-lg leading-none" style={{ color: dark ? '#fff' : DARK }}>
+        <div className="font-extrabold text-lg leading-none text-white">
           Skuli <span style={{ color: GOLD }}>UG</span>
         </div>
-        <div className="text-[9px] tracking-[0.2em] uppercase font-semibold" style={{ color: dark ? 'rgba(255,255,255,0.4)' : '#888' }}>
+        <div className="text-[9px] tracking-[0.2em] uppercase font-semibold" style={{ color: 'rgba(255,255,255,0.4)' }}>
           Uganda School Management
         </div>
       </div>
