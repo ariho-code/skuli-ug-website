@@ -4,18 +4,15 @@ import { useInView } from 'react-intersection-observer';
 import {
   FileText, TrendingUp, DollarSign, BookOpen, Users, MessageSquare,
   Brain, BarChart3, Shield, Bell, Smartphone, Calendar, UserCheck,
-  Layers, Clock, Award, ArrowRight,
+  Layers, Clock, Award, ArrowUpRight, Sparkles,
 } from 'lucide-react';
 
-const GOLD = '#E8B84B';
-const DARK = '#1a1a1a';
-
-function FadeIn({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
+function Reveal({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
   const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.07 });
   return (
-    <motion.div ref={ref} initial={{ opacity: 0, y: 22 }}
+    <motion.div ref={ref} initial={{ opacity: 0, y: 18 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] }}
       className={className}>
       {children}
     </motion.div>
@@ -26,102 +23,117 @@ const modules = [
   {
     category: 'Academics',
     items: [
-      { icon: FileText, title: 'AI-Powered Report Cards', desc: 'Automatically generate personalised pupil report cards with AI-written comments. Enter marks — the system does the writing.', badge: 'AI' },
-      { icon: TrendingUp, title: 'Mark Sheets & Grade Books', desc: 'Digital mark entry per subject per class. Automatic aggregates, positions and grade labels calculated instantly.' },
-      { icon: Calendar, title: 'Timetable Management', desc: 'Build and publish class timetables. Teachers see their schedule on their phone every day.' },
-      { icon: UserCheck, title: 'Student Promotion', desc: 'Review academic performance and promote students to the next class at end of term automatically.' },
+      { icon: FileText,   title: 'AI-powered report cards', desc: 'Personalised pupil report comments written automatically. Teachers enter marks — Skuli writes.', badge: 'AI' },
+      { icon: TrendingUp, title: 'Mark sheets & grade books', desc: 'Digital mark entry per subject. Automatic aggregates, positions and grade labels.' },
+      { icon: Calendar,   title: 'Timetable management', desc: 'Build and publish class timetables. Teachers see their schedule on their phone every day.' },
+      { icon: UserCheck,  title: 'Student promotion', desc: 'Review academic performance and promote pupils to the next class at end of term.' },
     ],
   },
   {
-    category: 'Students & Classes',
+    category: 'Students & classes',
     items: [
-      { icon: Users, title: 'Student Management', desc: 'Complete digital register for every pupil. Admission details, photos, medical notes and contacts all in one place.' },
-      { icon: Layers, title: 'Class & Stream Setup', desc: 'Manage class levels, streams and teacher assignments. Works for Nursery, Primary and O-Level schools.' },
-      { icon: Clock, title: 'Academic Year & Terms', desc: 'Configure academic years and terms. The system tracks current term automatically.' },
+      { icon: Users,  title: 'Student management', desc: 'Complete digital register per pupil: admission, photos, medical notes and contacts.' },
+      { icon: Layers, title: 'Class & stream setup', desc: 'Manage class levels, streams and teacher assignments. Works for Nursery, Primary and O-Level.' },
+      { icon: Clock,  title: 'Academic year & terms', desc: 'Configure academic years and terms. The system tracks current term automatically.' },
     ],
   },
   {
-    category: 'Fees & Finance',
+    category: 'Fees & finance',
     items: [
-      { icon: DollarSign, title: 'Fee Structures & Invoicing', desc: 'Set up fee items per term. Auto-generate invoices per pupil. Track paid and outstanding amounts instantly.' },
-      { icon: BarChart3, title: 'Financial Reports', desc: 'See total collected, outstanding balances and defaulters per class or school-wide. Export to PDF.' },
+      { icon: DollarSign, title: 'Fee structures & invoicing', desc: 'Per-term fee items. Auto-generate invoices. Track paid and outstanding amounts instantly.' },
+      { icon: BarChart3,  title: 'Financial reports', desc: 'Total collected, outstanding balances and defaulters per class or school-wide. PDF exports.' },
     ],
   },
   {
     category: 'Learning',
     items: [
-      { icon: BookOpen, title: 'E-Learning Module', desc: 'Share notes, videos, PDFs and lessons directly with students. Assignments submitted digitally.' },
-      { icon: Award, title: 'Homework & Assignments', desc: 'Teachers set homework, students submit responses. Teachers mark and return feedback online.' },
+      { icon: BookOpen, title: 'E-learning module', desc: 'Share notes, videos, PDFs and lessons. Assignments submitted and marked digitally.' },
+      { icon: Award,    title: 'Homework & assignments', desc: 'Teachers set homework; pupils submit. Feedback returned online.' },
     ],
   },
   {
     category: 'Communication',
     items: [
-      { icon: MessageSquare, title: 'Staff Chat', desc: 'Real-time group messaging between staff. Class groups, subject groups and whole-school announcements.' },
-      { icon: Bell, title: 'Announcements', desc: 'School-wide notices pushed to all staff and parents simultaneously. Pin important notices.' },
+      { icon: MessageSquare, title: 'Staff chat', desc: 'Real-time group messaging between staff. Class, subject and whole-school threads.' },
+      { icon: Bell,          title: 'Announcements', desc: 'School-wide notices pushed to staff and parents. Pin the important ones.' },
     ],
   },
   {
     category: 'Platform',
     items: [
-      { icon: Brain, title: 'Skuli AI', desc: 'Built-in AI assistant that helps teachers write comments, answers questions about the system and provides insights.' },
-      { icon: Smartphone, title: 'Mobile First', desc: 'Works on any Android or iPhone. No computer lab needed. Teachers use their own phones.' },
-      { icon: Shield, title: 'Role-Based Security', desc: 'Each staff member sees only what they need. Headteachers, teachers, bursars — all have the right access.' },
+      { icon: Brain,      title: 'Skuli AI', desc: 'Built-in AI assistant for comments, questions and quick insights.' },
+      { icon: Smartphone, title: 'Mobile first', desc: 'Works on any Android or iPhone — teachers use phones they already own.' },
+      { icon: Shield,     title: 'Role-based security', desc: 'Each staff member sees only what they need. Secure by default.' },
     ],
   },
 ];
 
 const upcoming = [
-  { icon: Bell, title: 'Parent SMS Alerts', desc: 'MTN & Airtel SMS to parents for fees and results.' },
-  { icon: Users, title: 'Parent Portal App', desc: 'Parents log in to track fees, marks and messages.' },
-  { icon: Layers, title: 'District Dashboard', desc: 'Multi-school oversight for education officers.' },
-  { icon: TrendingUp, title: 'Learning Analytics', desc: 'Pupil progress trends term-on-term with AI insights.' },
+  { icon: Bell,       title: 'Parent SMS alerts',  desc: 'MTN & Airtel SMS to parents for fees and results.' },
+  { icon: Users,      title: 'Parent portal app',  desc: 'Parents log in to track fees, marks and messages.' },
+  { icon: Layers,     title: 'District dashboard', desc: 'Multi-school oversight for education officers.' },
+  { icon: TrendingUp, title: 'Learning analytics', desc: 'Pupil progress trends term-on-term, with AI insights.' },
 ];
 
 export default function FeaturesPage() {
   return (
-    <div style={{ background: DARK, color: '#fff', paddingTop: 68 }}>
+    <div className="bg-paper text-ink" style={{ paddingTop: 72 }}>
 
       {/* Hero */}
-      <section className="py-20 text-center" style={{ background: DARK }}>
-        <div className="max-w-4xl mx-auto px-5">
-          <FadeIn>
-            <div className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: GOLD }}>Full Feature Set</div>
-            <h1 className="text-5xl font-extrabold text-white mb-4">Everything your school needs</h1>
-            <p className="text-white/55 text-lg max-w-2xl mx-auto">
-              From student admissions to AI-powered report cards — every module you need to run a modern Ugandan primary school, on one platform.
+      <section className="relative pt-20 pb-16 lg:pb-20 paper-grain overflow-hidden">
+        <div aria-hidden className="absolute -top-32 -right-24 w-[520px] h-[520px] rounded-full opacity-40 pointer-events-none drift"
+          style={{ background: 'radial-gradient(closest-side, rgba(200,147,46,0.22), transparent 70%)' }} />
+        <div className="relative max-w-4xl mx-auto px-5 lg:px-8">
+          <Reveal>
+            <div className="eyebrow mb-5">Full feature set</div>
+            <h1 className="font-display text-[clamp(2.4rem,5.6vw,4.8rem)] leading-[1.0] tracking-tightest text-ink mb-6">
+              Everything your school needs,<br />
+              <span className="font-display-italic text-gold">on one platform.</span>
+            </h1>
+            <p className="text-[17px] text-muted leading-relaxed max-w-2xl">
+              From student admissions to AI-powered report cards — every module a modern Ugandan
+              primary school actually uses. Designed for our curriculum, our calendar, our network conditions.
             </p>
-          </FadeIn>
+          </Reveal>
         </div>
       </section>
 
       {/* Modules */}
       {modules.map((section, si) => (
-        <section key={section.category} className="py-10" style={{ background: si % 2 === 0 ? '#111' : DARK }}>
-          <div className="max-w-7xl mx-auto px-5 lg:px-8">
-            <FadeIn>
-              <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: GOLD }}>{section.category}</div>
-            </FadeIn>
+        <section key={section.category} className={`py-14 ${si % 2 === 1 ? 'bg-paper-2 border-y border-[color:var(--line)]' : ''}`}>
+          <div className="max-w-6xl mx-auto px-5 lg:px-8">
+            <Reveal className="mb-8 flex items-end justify-between gap-6">
+              <div>
+                <div className="eyebrow mb-3">{section.category}</div>
+                <h2 className="font-display text-[clamp(1.6rem,3vw,2.2rem)] leading-tight tracking-tight text-ink">
+                  {section.category}
+                </h2>
+              </div>
+              <div className="hidden sm:block text-[12px] font-mono text-muted-2 mb-2">
+                {String(si + 1).padStart(2, '0')} / {String(modules.length).padStart(2, '0')}
+              </div>
+            </Reveal>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
               {section.items.map((item, i) => (
-                <FadeIn key={item.title} delay={i * 0.07}>
-                  <motion.div whileHover={{ y: -4 }}
-                    className="rounded-2xl p-6 h-full transition-all"
-                    style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)' }}
-                    onMouseEnter={e => (e.currentTarget.style.borderColor = 'rgba(232,184,75,0.3)')}
-                    onMouseLeave={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)')}>
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'rgba(232,184,75,0.1)' }}>
-                        <item.icon className="w-5 h-5" style={{ color: GOLD }} />
+                <Reveal key={item.title} delay={i * 0.05}>
+                  <motion.div whileHover={{ y: -3 }}
+                    transition={{ duration: 0.2 }}
+                    className="card h-full bg-paper">
+                    <div className="flex items-start justify-between mb-5">
+                      <div className="w-11 h-11 rounded-xl flex items-center justify-center bg-paper-2 border border-[color:var(--line)]">
+                        <item.icon className="w-5 h-5 text-gold" />
                       </div>
                       {item.badge && (
-                        <span className="px-2 py-0.5 rounded-md text-xs font-bold" style={{ background: GOLD, color: DARK }}>{item.badge}</span>
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10.5px] font-bold tracking-wider uppercase"
+                          style={{ background: 'var(--ink)', color: 'var(--gold-soft)' }}>
+                          <Sparkles className="w-3 h-3" /> {item.badge}
+                        </span>
                       )}
                     </div>
-                    <h3 className="font-bold text-white mb-2">{item.title}</h3>
-                    <p className="text-sm text-white/50 leading-relaxed">{item.desc}</p>
+                    <h3 className="font-display text-[18px] font-semibold tracking-tight text-ink mb-2">{item.title}</h3>
+                    <p className="text-[14px] text-muted leading-relaxed">{item.desc}</p>
                   </motion.div>
-                </FadeIn>
+                </Reveal>
               ))}
             </div>
           </div>
@@ -129,43 +141,46 @@ export default function FeaturesPage() {
       ))}
 
       {/* Upcoming */}
-      <section className="py-20" style={{ background: '#111' }}>
-        <div className="max-w-7xl mx-auto px-5 lg:px-8">
-          <FadeIn className="mb-10">
-            <div className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: GOLD }}>Coming Soon</div>
-            <h2 className="text-3xl font-extrabold text-white">What we're building next</h2>
-          </FadeIn>
+      <section className="py-20 bg-paper">
+        <div className="max-w-6xl mx-auto px-5 lg:px-8">
+          <Reveal className="mb-10 max-w-2xl">
+            <div className="eyebrow mb-4" style={{ color: 'var(--clay)' }}>On the roadmap</div>
+            <h2 className="font-display text-[clamp(1.8rem,4vw,2.6rem)] leading-tight tracking-tightest text-ink">
+              What we're building next.
+            </h2>
+          </Reveal>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {upcoming.map((f, i) => (
-              <FadeIn key={f.title} delay={i * 0.07}>
-                <div className="rounded-2xl p-5" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
-                  <span className="inline-block px-2 py-0.5 rounded-md text-xs font-bold mb-3" style={{ background: 'rgba(232,184,75,0.12)', color: GOLD }}>
-                    COMING SOON
+              <Reveal key={f.title} delay={i * 0.06}>
+                <div className="rounded-2xl p-5 h-full bg-paper-2 border border-dashed border-[color:var(--line-strong)]">
+                  <span className="inline-block text-[10px] font-bold tracking-wider uppercase mb-3 px-2 py-0.5 rounded-md"
+                    style={{ background: 'rgba(194,92,46,0.10)', color: 'var(--clay)' }}>
+                    soon
                   </span>
-                  <f.icon className="w-5 h-5 mb-2" style={{ color: 'rgba(255,255,255,0.35)' }} />
-                  <h3 className="font-bold text-white text-sm mb-1">{f.title}</h3>
-                  <p className="text-xs text-white/40">{f.desc}</p>
+                  <f.icon className="w-5 h-5 mb-2 text-muted" />
+                  <h3 className="font-display text-[16px] font-semibold tracking-tight text-ink mb-1">{f.title}</h3>
+                  <p className="text-[12.5px] text-muted">{f.desc}</p>
                 </div>
-              </FadeIn>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
       {/* CTA */}
-      <section className="py-16 text-center" style={{ background: DARK }}>
-        <div className="max-w-xl mx-auto px-5">
-          <FadeIn>
-            <h2 className="text-3xl font-extrabold text-white mb-4">Ready to see it live?</h2>
-            <p className="text-white/50 mb-8">Book a free demo. We come to your school and walk you through everything.</p>
-            <Link to="/contact"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-base transition-all"
-              style={{ background: GOLD, color: DARK }}
-              onMouseEnter={e => (e.currentTarget.style.background = '#d4a017')}
-              onMouseLeave={e => (e.currentTarget.style.background = GOLD)}>
-              Book a Free Demo <ArrowRight className="w-4 h-4" />
+      <section className="py-24 bg-ink text-paper-2">
+        <div className="max-w-3xl mx-auto px-5 text-center">
+          <Reveal>
+            <h2 className="font-display text-[clamp(2rem,4.6vw,3rem)] leading-tight tracking-tightest mb-5">
+              Ready to see it live?
+            </h2>
+            <p className="text-[16px] text-paper-3/75 mb-9">
+              Book a free demo. We come to your school and walk you through everything.
+            </p>
+            <Link to="/contact" className="btn" style={{ background: 'var(--gold)', color: '#1A1611' }}>
+              Book a free demo <ArrowUpRight className="w-4 h-4" />
             </Link>
-          </FadeIn>
+          </Reveal>
         </div>
       </section>
     </div>
