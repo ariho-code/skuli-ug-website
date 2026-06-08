@@ -7,7 +7,7 @@ import {
   FileText, Sparkles, Star, MessageCircle,
 } from 'lucide-react';
 
-const APP_URL = 'https://primary.skuliug.com';
+const APP_URL = 'https://school.skuliug.com';
 const PHONE1 = '+256 760 730 254';
 const PHONE2 = '+256 709 234 352';
 
