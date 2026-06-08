@@ -7,7 +7,7 @@ const DARK = '#111111';
 const PHONE1 = '+256 760 730 254';
 const PHONE2 = '+256 709 234 352';
 const SALES_EMAIL = 'sales@skuliug.com';
-const APP_URL = 'https://primary.skuliug.com';
+const APP_URL = 'https://school.skuliug.com';
 
 export default function Footer() {
   return (
