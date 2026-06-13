@@ -6,11 +6,15 @@ on:
   pull_request:
     branches: [main]
 
-jobs:
-  build-and-deploy:
-    name: Build & Deploy (Vercel)
-    runs-on: ubuntu-latest
+# Explicit minimal permissions — required for GitHub Actions to allocate a runner
+permissions:
+  contents: read
 
+jobs:
+  # ── Job 1: Always runs — validates the build on every push/PR ──────────────
+  build:
+    name: Build & Lint
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
@@ -24,16 +28,37 @@ jobs:
         run: npm ci
 
       - name: Type check
-        run: npx tsc --noEmit
+        # Use tsc -b (project references) to match what npm run build does
+        run: npx tsc -b --noEmit
 
       - name: Build
         run: npm run build
 
+  # ── Job 2: Only runs on main push, only when Vercel secrets are set ────────
+  deploy:
+    name: Deploy to Vercel
+    needs: build
+    runs-on: ubuntu-latest
+    if: >
+      github.ref == 'refs/heads/main' &&
+      github.event_name == 'push' &&
+      vars.VERCEL_DEPLOY == 'true'
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
       - name: Deploy to Vercel
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
-          npm install -g vercel
-          vercel --prod --token=${{ secrets.VERCEL_TOKEN }} --yes
+          npm install -g vercel@latest
+          vercel --prod --token="${{ secrets.VERCEL_TOKEN }}" --yes
         env:
           VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
           VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID_WEBSITE }}
