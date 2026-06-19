@@ -296,6 +296,175 @@ a.inline-link:hover { color: var(--gold); }
 }
 .float-glow { animation: float-glow 6s ease-in-out infinite; }
 
+/* ───────────────────────────────────────────────────────────
+   Editorial utilities — prospectus-style homepage redesign
+   ─────────────────────────────────────────────────────────── */
+
+/* Masthead dateline strip — sits above the hero like a newspaper banner */
+.masthead {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink);
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.masthead .hair {
+  flex: 1;
+  height: 1px;
+  background: var(--line-strong);
+}
+
+/* Kicker — section label with chapter numeral */
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+.kicker .num {
+  color: var(--ink);
+  opacity: 0.38;
+  margin-right: 10px;
+}
+
+/* Drop cap — for editorial lede paragraphs */
+.dropcap::first-letter {
+  font-family: 'Fraunces', 'Source Serif Pro', Georgia, serif;
+  font-variation-settings: 'SOFT' 100, 'WONK' 1, 'opsz' 144;
+  float: left;
+  font-size: 5.4em;
+  line-height: 0.82;
+  margin: 0.06em 0.12em 0 -0.04em;
+  color: var(--gold);
+  font-weight: 500;
+}
+
+/* Pull quote — for emphasised editorial passages */
+.pullquote {
+  position: relative;
+  font-family: 'Fraunces', 'Source Serif Pro', Georgia, serif;
+  font-style: italic;
+  font-variation-settings: 'SOFT' 100, 'WONK' 1, 'opsz' 144;
+  font-size: clamp(1.55rem, 2.4vw, 2.05rem);
+  line-height: 1.2;
+  letter-spacing: -0.018em;
+  color: var(--ink);
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--line-strong);
+}
+
+/* Letter-style testimonial */
+.letter {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 26px 26px 22px;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+}
+.letter::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 22px; right: 22px;
+  height: 4px;
+  background: repeating-linear-gradient(90deg, var(--gold) 0 5px, transparent 5px 10px);
+  opacity: 0.35;
+}
+
+/* Roman numeral display */
+.roman-numeral {
+  font-family: 'Fraunces', 'Source Serif Pro', Georgia, serif;
+  font-style: italic;
+  font-variation-settings: 'SOFT' 100, 'WONK' 1, 'opsz' 144;
+  font-weight: 500;
+  color: var(--gold);
+  line-height: 1;
+}
+
+/* Stamp / approval mark */
+.stamp {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-weight: 700;
+  font-size: 9.5px;
+  letter-spacing: 0.18em;
+  color: var(--clay);
+  border: 1.4px solid var(--clay);
+  padding: 4px 9px;
+  border-radius: 2px;
+  text-transform: uppercase;
+  display: inline-block;
+  transform: rotate(-3deg);
+  opacity: 0.85;
+}
+
+/* Report paper — gives the hero report card a printed, lightly-grained feel */
+.report-paper {
+  background: linear-gradient(180deg, #FBF7EE 0%, #F5EFE2 100%);
+  border: 1px solid rgba(28, 26, 23, 0.10);
+  border-radius: 3px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    0 14px 36px -10px rgba(28, 26, 23, 0.20),
+    0 6px 12px -4px rgba(28, 26, 23, 0.10);
+  position: relative;
+  overflow: hidden;
+}
+.report-paper::after {
+  content: '';
+  position: absolute; inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='1.2' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.05 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  opacity: 0.55;
+  mix-blend-mode: multiply;
+}
+.report-paper-edge {
+  height: 4px;
+  background:
+    linear-gradient(90deg,
+      transparent 0,
+      var(--gold) 8%,
+      var(--gold) 92%,
+      transparent 100%);
+  opacity: 0.85;
+}
+
+/* Schedule-of-fees row — editorial pricing table */
+.fee-row {
+  display: grid;
+  grid-template-columns: 2.6rem 1fr auto;
+  align-items: start;
+  gap: 22px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+}
+.fee-row:last-child { border-bottom: none; }
+@media (min-width: 768px) {
+  .fee-row { grid-template-columns: 2.6rem 1fr 1fr auto; }
+}
+.fee-row .roman {
+  font-family: 'Fraunces', 'Source Serif Pro', Georgia, serif;
+  font-style: italic;
+  font-variation-settings: 'SOFT' 100, 'WONK' 1, 'opsz' 144;
+  font-size: 1.7rem;
+  color: var(--gold);
+  line-height: 1.1;
+  text-align: center;
+}
+.fee-row .dots {
+  height: 0;
+  border-bottom: 1px dotted var(--muted-2);
+  align-self: center;
+  margin-top: 14px;
+}
+
 /* Reduce motion respect */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
