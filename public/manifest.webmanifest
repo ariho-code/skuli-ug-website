@@ -1,0 +1,20 @@
+{
+  "name": "Skuli UG — School Management System",
+  "short_name": "Skuli UG",
+  "description": "Uganda's all-in-one school management platform. Report cards, fees, e-learning and AI — all on your teachers' phones.",
+  "start_url": "/?source=pwa",
+  "id": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#07182F",
+  "theme_color": "#07182F",
+  "lang": "en",
+  "categories": ["education", "productivity", "business"],
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
