@@ -94,9 +94,9 @@ const steps = [
 
 const plans = [
   { name: 'Starter', sub: 'Under 150 pupils', price: '150,000', usd: '$40', hl: false, badge: null, f: ['Report cards & mark sheets', 'Fees tracking', 'Up to 5 teacher accounts', 'Mobile access'] },
-  { name: 'Growth', sub: '150 – 400 pupils', price: '300,000', usd: '$80', hl: true, badge: 'Most popular', f: ['Everything in Starter', 'E-learning module', 'AI report comments', 'Analytics dashboard', 'Up to 20 teachers'] },
+  { name: 'Growth', sub: '150 – 400 pupils', price: '300,000', usd: '$80', hl: false, badge: null, f: ['Everything in Starter', 'E-learning module', 'AI report comments', 'Analytics dashboard', 'Up to 20 teachers'] },
   { name: 'Pro', sub: '400 – 800 pupils', price: '500,000', usd: '$130', hl: false, badge: null, f: ['Everything in Growth', 'Parent SMS alerts', 'Advanced analytics', 'Unlimited teachers', 'Priority support'] },
-  { name: 'Enterprise', sub: '800+ pupils', price: '800,000+', usd: '$210+', hl: false, badge: null, f: ['Everything in Pro', 'Custom school branding', 'Multi-campus support', 'Dedicated onboarding'] },
+  { name: 'Enterprise', sub: '800+ pupils', price: '800,000+', usd: '$210+', hl: true, badge: 'Most commonly bought', f: ['Everything in Pro', 'Custom school branding', 'Multi-campus support', 'Dedicated onboarding'] },
 ];
 
 const whySkuli = [

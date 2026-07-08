@@ -1,24 +1,25 @@
 import { useState } from 'react';
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
 import { Phone, Mail, MapPin, MessageCircle, Send, CheckCircle2, ExternalLink } from 'lucide-react';
+import { FadeIn, Eyebrow, GOLD, INK, APP_URL, PHONE1, PHONE2, SALES_EMAIL, goldTile } from '../lib/theme';
 
-const GOLD = '#F57A12';
-const DARK = '#0C2C57';
-const PHONE1 = '+256 760 730 254';
-const PHONE2 = '+256 709 234 352';
-const SALES_EMAIL = 'sales@skuliug.com';
-const APP_URL = 'https://school.skuliug.com';
-
-function FadeIn({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.07 });
+function ContactCard({ icon: Icon, title, lines, href, hint }: { icon: typeof Phone; title: string; lines: string[]; href: string | null; hint: string }) {
   return (
-    <motion.div ref={ref} initial={{ opacity: 0, y: 22 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
-      className={className}>
-      {children}
-    </motion.div>
+    <div className="card-hover rounded-3xl p-6" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
+      <div className="flex items-start gap-4">
+        <div className="w-11 h-11 rounded-2xl grid place-items-center flex-shrink-0" style={{ background: goldTile }}>
+          <Icon className="w-5 h-5" style={{ color: GOLD }} />
+        </div>
+        <div>
+          <div className="font-display font-bold text-white mb-1">{title}</div>
+          {lines.map(l => (
+            href
+              ? <a key={l} href={href} className="block text-sm text-white/70 hover:text-white transition-colors">{l}</a>
+              : <p key={l} className="text-sm text-white/70">{l}</p>
+          ))}
+          <p className="text-xs text-white/35 mt-1">{hint}</p>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -52,7 +53,7 @@ export default function ContactPage() {
     background: 'rgba(255,255,255,0.05)',
     border: '1px solid rgba(255,255,255,0.12)',
     color: '#fff',
-    borderRadius: 10,
+    borderRadius: 12,
     padding: '12px 14px',
     fontSize: 14,
     outline: 'none',
@@ -61,63 +62,46 @@ export default function ContactPage() {
   };
 
   return (
-    <div style={{ background: DARK, color: '#fff', paddingTop: 68 }}>
+    <div style={{ background: INK, color: '#fff' }}>
 
-      {/* Hero */}
-      <section className="py-20" style={{ background: DARK }}>
-        <div className="max-w-4xl mx-auto px-5">
+      {/* ── HERO ─────────────────────────────── */}
+      <section className="relative overflow-hidden pt-28 sm:pt-32 pb-16 sm:pb-20">
+        <div className="absolute inset-0 grid-bg pointer-events-none" />
+        <div className="glow absolute -top-32 right-[-10%] w-[560px] h-[560px] rounded-full pointer-events-none"
+          style={{ background: 'radial-gradient(circle at 60% 40%, rgba(245,122,18,.3), transparent 65%)' }} />
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
-            <div className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: GOLD }}>Contact Us</div>
-            <h1 className="text-5xl font-extrabold text-white mb-4">Let's talk about your school</h1>
-            <p className="text-white/55 text-lg max-w-xl">
+            <Eyebrow>CONTACT US</Eyebrow>
+            <h1 className="font-display font-extrabold tracking-tight leading-[1.05] text-balance mb-5" style={{ fontSize: 'clamp(2.3rem,6vw,3.8rem)' }}>
+              Let's talk about <span className="gold-text">your school</span>
+            </h1>
+            <p className="text-pretty text-white/60 max-w-xl" style={{ fontSize: 'clamp(1rem,1.6vw,1.15rem)', lineHeight: 1.65 }}>
               Book a free demo, ask a question or discuss a custom build. We're based in Uganda and respond fast.
             </p>
           </FadeIn>
         </div>
       </section>
 
-      {/* Main grid */}
-      <section className="pb-24">
-        <div className="max-w-6xl mx-auto px-5 grid lg:grid-cols-2 gap-8">
+      {/* ── MAIN GRID ────────────────────────── */}
+      <section className="pb-20 sm:pb-28">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-6 sm:gap-8">
 
           {/* Left — contact info */}
           <FadeIn>
-            <div className="space-y-5">
-              {/* Contact cards */}
-              {[
-                { icon: Phone, title: 'Call or WhatsApp', lines: [PHONE1, PHONE2], href: `tel:${PHONE1.replace(/\s/g,'')}`, hint: 'Mon – Sat, 8am – 8pm' },
-                { icon: Mail, title: 'Email', lines: [SALES_EMAIL], href: `mailto:${SALES_EMAIL}`, hint: 'We respond within 2 hours during business hours' },
-                { icon: MapPin, title: 'Location', lines: ['Kampala, Uganda'], href: null, hint: 'We do on-site demos anywhere in Uganda' },
-              ].map(c => (
-                <div key={c.title} className="rounded-2xl p-6" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: 'rgba(245,122,18,0.1)' }}>
-                      <c.icon className="w-5 h-5" style={{ color: GOLD }} />
-                    </div>
-                    <div>
-                      <div className="font-bold text-white mb-1">{c.title}</div>
-                      {c.lines.map(l => (
-                        c.href
-                          ? <a key={l} href={c.href} className="block text-sm text-white/70 hover:text-white transition-colors">{l}</a>
-                          : <p key={l} className="text-sm text-white/70">{l}</p>
-                      ))}
-                      <p className="text-xs text-white/35 mt-1">{c.hint}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
+            <div className="space-y-4">
+              <ContactCard icon={Phone} title="Call or WhatsApp" lines={[PHONE1, PHONE2]} href={`tel:${PHONE1.replace(/\s/g, '')}`} hint="Mon – Sat, 8am – 8pm" />
+              <ContactCard icon={Mail} title="Email" lines={[SALES_EMAIL]} href={`mailto:${SALES_EMAIL}`} hint="We respond within 2 hours during business hours" />
+              <ContactCard icon={MapPin} title="Location" lines={['Kampala, Uganda']} href={null} hint="We do on-site demos anywhere in Uganda" />
 
               {/* WhatsApp CTA */}
               <a href="https://wa.me/256760730254" target="_blank" rel="noreferrer"
-                className="flex items-center gap-3 rounded-2xl p-6 transition-all"
-                style={{ background: 'rgba(37,211,102,0.08)', border: '1px solid rgba(37,211,102,0.2)' }}
-                onMouseEnter={e => (e.currentTarget.style.background = 'rgba(37,211,102,0.12)')}
-                onMouseLeave={e => (e.currentTarget.style.background = 'rgba(37,211,102,0.08)')}>
-                <div className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style={{ background: '#25d366' }}>
+                className="card-hover flex items-center gap-3 rounded-3xl p-6"
+                style={{ background: 'rgba(37,211,102,0.08)', border: '1px solid rgba(37,211,102,0.2)' }}>
+                <div className="w-11 h-11 rounded-2xl grid place-items-center flex-shrink-0" style={{ background: '#25d366' }}>
                   <MessageCircle className="w-5 h-5 text-white" />
                 </div>
                 <div className="flex-1">
-                  <div className="font-bold text-white">WhatsApp us directly</div>
+                  <div className="font-display font-bold text-white">WhatsApp us directly</div>
                   <div className="text-sm text-white/55">Fastest way to reach us — tap to chat</div>
                 </div>
                 <ExternalLink className="w-4 h-4 text-white/30" />
@@ -125,12 +109,10 @@ export default function ContactPage() {
 
               {/* Demo quick link */}
               <a href={`${APP_URL}/login`}
-                className="flex items-center justify-between rounded-2xl p-6 transition-all"
-                style={{ background: 'rgba(245,122,18,0.07)', border: `1px solid rgba(245,122,18,0.2)` }}
-                onMouseEnter={e => (e.currentTarget.style.background = 'rgba(245,122,18,0.12)')}
-                onMouseLeave={e => (e.currentTarget.style.background = 'rgba(245,122,18,0.07)')}>
+                className="card-hover flex items-center justify-between rounded-3xl p-6"
+                style={{ background: 'rgba(245,122,18,0.07)', border: '1px solid rgba(245,122,18,0.2)' }}>
                 <div>
-                  <div className="font-bold text-white mb-0.5">Access the demo</div>
+                  <div className="font-display font-bold text-white mb-0.5">Access the demo</div>
                   <div className="text-sm text-white/50">Try the live platform right now</div>
                 </div>
                 <ExternalLink className="w-4 h-4" style={{ color: GOLD }} />
@@ -140,14 +122,14 @@ export default function ContactPage() {
 
           {/* Right — form */}
           <FadeIn delay={0.1}>
-            <div className="rounded-2xl p-7 sm:p-8" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
-              <h2 className="text-xl font-bold text-white mb-1">Send us a message</h2>
+            <div className="rounded-3xl p-7 sm:p-8" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
+              <h2 className="font-display text-xl font-bold text-white mb-1">Send us a message</h2>
               <p className="text-sm text-white/45 mb-6">We read every message and reply within 2 hours.</p>
 
               {status === 'sent' ? (
                 <div className="text-center py-12">
                   <CheckCircle2 className="w-12 h-12 mx-auto mb-4" style={{ color: GOLD }} />
-                  <h3 className="text-xl font-bold text-white mb-2">Message received!</h3>
+                  <h3 className="font-display text-xl font-bold text-white mb-2">Message received!</h3>
                   <p className="text-white/55">We'll get back to you very soon at your email address.</p>
                   <button className="mt-6 text-sm font-medium" style={{ color: GOLD }}
                     onClick={() => setStatus('idle')}>Send another message</button>
@@ -199,10 +181,8 @@ export default function ContactPage() {
                     <p className="text-red-400 text-sm">Something went wrong. Please email us directly at {SALES_EMAIL}</p>
                   )}
                   <button type="submit" disabled={status === 'sending'}
-                    className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl font-bold text-sm transition-all"
-                    style={{ background: GOLD, color: DARK, opacity: status === 'sending' ? 0.7 : 1 }}
-                    onMouseEnter={e => (e.currentTarget.style.background = '#DA6A0C')}
-                    onMouseLeave={e => (e.currentTarget.style.background = GOLD)}>
+                    className="btn-gold w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl font-bold text-sm"
+                    style={{ opacity: status === 'sending' ? 0.7 : 1 }}>
                     {status === 'sending' ? 'Sending…' : <><Send className="w-4 h-4" /> Send Message</>}
                   </button>
                   <p className="text-center text-xs text-white/30">

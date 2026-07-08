@@ -91,8 +91,11 @@ export default function PrivacyPage() {
   return (
     <div style={{ background: '#fafafa', minHeight: '100vh' }}>
       {/* Hero */}
-      <div style={{ background: DARK, paddingTop: 100, paddingBottom: 60 }}>
-        <div className="max-w-3xl mx-auto px-5 lg:px-8">
+      <div className="relative overflow-hidden" style={{ background: DARK, paddingTop: 128, paddingBottom: 64 }}>
+        <div className="absolute inset-0 grid-bg pointer-events-none" />
+        <div className="glow absolute -top-32 right-[-10%] w-[480px] h-[480px] rounded-full pointer-events-none"
+          style={{ background: 'radial-gradient(circle at 60% 40%, rgba(245,122,18,.25), transparent 65%)' }} />
+        <div className="relative max-w-3xl mx-auto px-5 lg:px-8">
           <Link to="/" className="inline-flex items-center gap-2 text-sm font-semibold mb-8 transition-colors hover:opacity-80"
             style={{ color: GOLD }}>
             <ArrowLeft className="w-4 h-4" /> Back to Home
@@ -103,7 +106,7 @@ export default function PrivacyPage() {
               <Shield className="w-6 h-6" style={{ color: GOLD }} />
             </div>
             <div>
-              <h1 className="text-3xl font-extrabold text-white tracking-tight">Privacy Policy</h1>
+              <h1 className="font-display text-3xl font-extrabold text-white tracking-tight">Privacy Policy</h1>
               <p className="text-sm mt-1" style={{ color: 'rgba(255,255,255,0.4)' }}>Last updated: {YEAR} · Skuli UG</p>
             </div>
           </div>
@@ -123,8 +126,8 @@ export default function PrivacyPage() {
             <motion.div key={s.title}
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: i * 0.04 }}
-              className="bg-white rounded-2xl p-6 border border-slate-100 shadow-sm">
-              <h2 className="text-base font-bold mb-3" style={{ color: DARK }}>{s.title}</h2>
+              className="card-hover bg-white rounded-3xl p-6 border border-slate-100 shadow-sm">
+              <h2 className="font-display text-base font-bold mb-3" style={{ color: DARK }}>{s.title}</h2>
               <p className="text-sm text-slate-600 leading-relaxed">{s.body}</p>
               {s.bullets && (
                 <ul className="mt-3 space-y-1.5 pl-4">

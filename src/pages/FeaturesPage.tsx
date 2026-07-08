@@ -1,26 +1,10 @@
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { useInView } from 'react-intersection-observer';
 import {
   FileText, TrendingUp, DollarSign, BookOpen, Users, MessageSquare,
   Brain, BarChart3, Shield, Bell, Smartphone, Calendar, UserCheck,
-  Layers, Clock, Award, ArrowRight,
+  Layers, Clock, Award, ArrowRight, Phone, Check,
 } from 'lucide-react';
-
-const GOLD = '#F57A12';
-const DARK = '#0C2C57';
-
-function FadeIn({ children, delay = 0, className = '' }: { children: React.ReactNode; delay?: number; className?: string }) {
-  const [ref, inView] = useInView({ triggerOnce: true, threshold: 0.07 });
-  return (
-    <motion.div ref={ref} initial={{ opacity: 0, y: 22 }}
-      animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
-      className={className}>
-      {children}
-    </motion.div>
-  );
-}
+import { FadeIn, Eyebrow, GOLD, GOLD_DEEP, INK, INK2, CREAM, PHONE1, goldTile } from '../lib/theme';
 
 const modules = [
   {
@@ -80,71 +64,85 @@ const upcoming = [
 
 export default function FeaturesPage() {
   return (
-    <div style={{ background: DARK, color: '#fff', paddingTop: 68 }}>
+    <div style={{ background: INK, color: '#fff' }}>
 
-      {/* Hero */}
-      <section className="py-20 text-center" style={{ background: DARK }}>
-        <div className="max-w-4xl mx-auto px-5">
+      {/* ── HERO ─────────────────────────────── */}
+      <section className="relative overflow-hidden pt-28 sm:pt-32 pb-16 sm:pb-20">
+        <div className="absolute inset-0 grid-bg pointer-events-none" />
+        <div className="glow absolute -top-32 right-[-10%] w-[560px] h-[560px] rounded-full pointer-events-none"
+          style={{ background: 'radial-gradient(circle at 60% 40%, rgba(245,122,18,.3), transparent 65%)' }} />
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <FadeIn>
-            <div className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: GOLD }}>Full Feature Set</div>
-            <h1 className="text-5xl font-extrabold text-white mb-4">Everything your school needs</h1>
-            <p className="text-white/55 text-lg max-w-2xl mx-auto">
+            <Eyebrow>FULL FEATURE SET</Eyebrow>
+            <h1 className="font-display font-extrabold tracking-tight leading-[1.05] text-balance mb-5" style={{ fontSize: 'clamp(2.3rem,6vw,3.8rem)' }}>
+              Everything your <span className="gold-text">school</span> needs
+            </h1>
+            <p className="text-pretty text-white/60 mx-auto mb-8 max-w-2xl" style={{ fontSize: 'clamp(1rem,1.6vw,1.15rem)', lineHeight: 1.65 }}>
               From student admissions to AI-powered report cards — every module you need to run a modern Ugandan primary school, on one platform.
             </p>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Link to="/contact" className="btn-gold flex items-center justify-center gap-2 px-7 py-4 rounded-2xl font-bold text-[15px]">
+                Book a free demo <ArrowRight className="w-4 h-4" />
+              </Link>
+              <a href={`tel:${PHONE1.replace(/\s/g, '')}`} className="btn-ghost flex items-center justify-center gap-2 px-7 py-4 rounded-2xl font-semibold text-[15px] text-white" style={{ border: '1px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.06)' }}>
+                <Phone className="w-4 h-4" style={{ color: GOLD }} /> {PHONE1}
+              </a>
+            </div>
           </FadeIn>
         </div>
       </section>
 
-      {/* Modules */}
-      {modules.map((section, si) => (
-        <section key={section.category} className="py-10" style={{ background: si % 2 === 0 ? '#061530' : DARK }}>
-          <div className="max-w-7xl mx-auto px-5 lg:px-8">
-            <FadeIn>
-              <div className="text-xs font-bold uppercase tracking-widest mb-2" style={{ color: GOLD }}>{section.category}</div>
-            </FadeIn>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {section.items.map((item, i) => (
-                <FadeIn key={item.title} delay={i * 0.07}>
-                  <motion.div whileHover={{ y: -4 }}
-                    className="rounded-2xl p-6 h-full transition-all"
-                    style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)' }}
-                    onMouseEnter={e => (e.currentTarget.style.borderColor = 'rgba(245,122,18,0.3)')}
-                    onMouseLeave={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.07)')}>
-                    <div className="flex items-start justify-between mb-4">
-                      <div className="w-10 h-10 rounded-xl flex items-center justify-center" style={{ background: 'rgba(245,122,18,0.1)' }}>
-                        <item.icon className="w-5 h-5" style={{ color: GOLD }} />
+      {/* ── MODULES (LIGHT) ─────────────────── */}
+      <section className="py-16 sm:py-24" style={{ background: CREAM, color: '#0C2C57' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14 sm:space-y-16">
+          {modules.map((section, si) => (
+            <div key={section.category}>
+              <FadeIn className="mb-6 sm:mb-7">
+                <div className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: GOLD_DEEP }}>{String(si + 1).padStart(2, '0')} · {section.category}</div>
+              </FadeIn>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+                {section.items.map((item, i) => (
+                  <FadeIn key={item.title} delay={(i % 3) * 0.06}>
+                    <div className="card-hover group rounded-3xl p-6 h-full" style={{ background: '#fff', border: '1px solid rgba(12,44,87,0.06)', boxShadow: '0 1px 3px rgba(0,0,0,0.04)' }}>
+                      <div className="flex items-start justify-between mb-5">
+                        <div className="w-12 h-12 rounded-2xl grid place-items-center" style={{ background: goldTile }}>
+                          <item.icon className="w-[22px] h-[22px]" style={{ color: GOLD_DEEP }} strokeWidth={2} />
+                        </div>
+                        {item.badge && (
+                          <span className="px-2.5 py-1 rounded-lg text-[11px] font-bold" style={{ background: GOLD, color: INK }}>{item.badge}</span>
+                        )}
                       </div>
-                      {item.badge && (
-                        <span className="px-2 py-0.5 rounded-md text-xs font-bold" style={{ background: GOLD, color: DARK }}>{item.badge}</span>
-                      )}
+                      <h3 className="font-display font-bold text-lg mb-2" style={{ color: '#0C2C57' }}>{item.title}</h3>
+                      <p className="text-[14.5px] leading-relaxed" style={{ color: 'rgba(12,44,87,0.55)' }}>{item.desc}</p>
                     </div>
-                    <h3 className="font-bold text-white mb-2">{item.title}</h3>
-                    <p className="text-sm text-white/50 leading-relaxed">{item.desc}</p>
-                  </motion.div>
-                </FadeIn>
-              ))}
+                  </FadeIn>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
-      ))}
+          ))}
+        </div>
+      </section>
 
-      {/* Upcoming */}
-      <section className="py-20" style={{ background: '#061530' }}>
-        <div className="max-w-7xl mx-auto px-5 lg:px-8">
-          <FadeIn className="mb-10">
-            <div className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: GOLD }}>Coming Soon</div>
-            <h2 className="text-3xl font-extrabold text-white">What we're building next</h2>
+      {/* ── COMING SOON ──────────────────────── */}
+      <section className="py-20 sm:py-28 relative overflow-hidden" style={{ background: INK }}>
+        <div className="absolute top-1/2 left-1/2 w-[700px] h-[700px] rounded-full pointer-events-none" style={{ transform: 'translate(-50%,-50%)', background: 'radial-gradient(circle, rgba(245,122,18,.07), transparent 70%)' }} />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FadeIn className="text-center max-w-2xl mx-auto mb-12">
+            <div className="text-xs font-bold uppercase tracking-[0.2em] mb-4" style={{ color: GOLD }}>Coming soon</div>
+            <h2 className="font-display font-extrabold tracking-tight text-balance" style={{ fontSize: 'clamp(2rem,4.5vw,3.2rem)', lineHeight: 1.05 }}>What we're building next</h2>
           </FadeIn>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
             {upcoming.map((f, i) => (
               <FadeIn key={f.title} delay={i * 0.07}>
-                <div className="rounded-2xl p-5" style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.06)' }}>
-                  <span className="inline-block px-2 py-0.5 rounded-md text-xs font-bold mb-3" style={{ background: 'rgba(245,122,18,0.12)', color: GOLD }}>
+                <div className="card-hover rounded-3xl p-6 h-full" style={{ background: 'rgba(255,255,255,0.035)', border: '1px solid rgba(255,255,255,0.08)' }}>
+                  <span className="inline-block px-2.5 py-1 rounded-lg text-[11px] font-bold mb-4" style={{ background: 'rgba(245,122,18,0.12)', color: GOLD }}>
                     COMING SOON
                   </span>
-                  <f.icon className="w-5 h-5 mb-2" style={{ color: 'rgba(255,255,255,0.35)' }} />
-                  <h3 className="font-bold text-white text-sm mb-1">{f.title}</h3>
-                  <p className="text-xs text-white/40">{f.desc}</p>
+                  <div className="w-11 h-11 rounded-2xl grid place-items-center mb-4" style={{ background: 'rgba(255,255,255,0.06)' }}>
+                    <f.icon className="w-5 h-5" style={{ color: 'rgba(255,255,255,0.45)' }} />
+                  </div>
+                  <h3 className="font-display font-bold text-white text-[15px] mb-1.5">{f.title}</h3>
+                  <p className="text-[13px] text-white/40 leading-snug">{f.desc}</p>
                 </div>
               </FadeIn>
             ))}
@@ -152,19 +150,23 @@ export default function FeaturesPage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-16 text-center" style={{ background: DARK }}>
-        <div className="max-w-xl mx-auto px-5">
+      {/* ── FINAL CTA ───────────────────────── */}
+      <section className="py-20 sm:py-28 relative overflow-hidden" style={{ background: `linear-gradient(180deg, ${INK2}, ${INK})` }}>
+        <div className="glow absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, rgba(245,122,18,.18), transparent 70%)' }} />
+        <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
-            <h2 className="text-3xl font-extrabold text-white mb-4">Ready to see it live?</h2>
-            <p className="text-white/50 mb-8">Book a free demo. We come to your school and walk you through everything.</p>
-            <Link to="/contact"
-              className="inline-flex items-center gap-2 px-8 py-4 rounded-xl font-bold text-base transition-all"
-              style={{ background: GOLD, color: DARK }}
-              onMouseEnter={e => (e.currentTarget.style.background = '#DA6A0C')}
-              onMouseLeave={e => (e.currentTarget.style.background = GOLD)}>
-              Book a Free Demo <ArrowRight className="w-4 h-4" />
-            </Link>
+            <div className="rounded-[2rem] p-8 sm:p-12 text-center" style={{ border: '1px solid rgba(245,122,18,0.2)', background: 'linear-gradient(180deg, rgba(255,255,255,0.05), transparent)' }}>
+              <h2 className="font-display font-extrabold tracking-tight text-balance mb-4" style={{ fontSize: 'clamp(2rem,5vw,3rem)', lineHeight: 1.04 }}>Ready to see it live?</h2>
+              <p className="text-white/60 text-lg max-w-xl mx-auto mb-8 text-pretty">Book a free demo. We come to your school and walk you through every module.</p>
+              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+                <Link to="/contact" className="btn-gold flex items-center justify-center gap-2 px-8 py-4 rounded-2xl font-bold text-base">
+                  Book a Free Demo <ArrowRight className="w-4 h-4" />
+                </Link>
+                <a href={`tel:${PHONE1.replace(/\s/g, '')}`} className="btn-ghost flex items-center justify-center gap-2 px-8 py-4 rounded-2xl font-semibold text-base text-white" style={{ border: '1px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.06)' }}>
+                  <Check className="w-4 h-4" style={{ color: GOLD }} /> {PHONE1}
+                </a>
+              </div>
+            </div>
           </FadeIn>
         </div>
       </section>
