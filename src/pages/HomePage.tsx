@@ -7,7 +7,7 @@ import { TypeAnimation } from 'react-type-animation';
 import {
   FileText, TrendingUp, DollarSign, BookOpen, BarChart3, UserCheck,
   Smartphone, Brain, Shield, ArrowRight, Phone, Check, Plus,
-  Timer, FileX2, Sparkles, GraduationCap, MessageCircle,
+  Timer, FileX2, Sparkles, MessageCircle,
 } from 'lucide-react';
 
 const GOLD = '#F57A12';
@@ -18,7 +18,7 @@ const INK2 = '#0B2242';
 const INK3 = '#123A66';
 const CREAM = '#FAF7F0';
 
-const APP_URL = 'https://primary.skuliug.com';
+const APP_URL = 'https://school.skuliug.com';
 const PHONE1 = '+256 760 730 254';
 const PHONE2 = '+256 709 234 352';
 
@@ -113,7 +113,6 @@ const faqs = [
   { q: 'Is our school data safe?', a: 'Yes. Access is role-based, so each teacher only sees their own class. Your school\u2019s data stays private and belongs to you.' },
 ];
 
-const trustSchools = ['Bright Future P/S', 'St. Mary\u2019s Junior', 'Kampala Parents', 'Hillside Primary', 'Greenhill Academy', 'Victoria Primary', 'Wakiso Day', 'Mukono Boarding', 'Sunrise Primary', 'City Parents'];
 
 /* ---------------- page ---------------- */
 export default function HomePage() {
@@ -180,24 +179,6 @@ export default function HomePage() {
               </div>
             </div>
           </FadeIn>
-        </div>
-      </section>
-
-      {/* ── TRUST STRIP ─────────────────────── */}
-      <section className="py-8 overflow-hidden" style={{ borderTop: '1px solid rgba(255,255,255,0.06)', borderBottom: '1px solid rgba(255,255,255,0.06)', background: 'rgba(11,34,66,0.4)' }}>
-        <p className="text-center text-[11px] uppercase tracking-[0.25em] text-white/35 font-semibold mb-5">Trusted by schools across Uganda</p>
-        <div className="relative">
-          <div className="flex w-max marquee-track gap-3 px-3">
-            {[0, 1].map(set => (
-              <div key={set} className="flex gap-3">
-                {trustSchools.map(name => (
-                  <span key={set + name} className="flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium whitespace-nowrap" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)', color: 'rgba(255,255,255,0.55)' }}>
-                    <GraduationCap className="w-4 h-4" style={{ color: GOLD }} /> {name}
-                  </span>
-                ))}
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 

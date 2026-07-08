@@ -5,7 +5,7 @@ import { Menu, X, ArrowRight } from 'lucide-react';
 
 const GOLD = '#F57A12';
 const INK = '#07182F';
-const APP_URL = 'https://primary.skuliug.com';
+const APP_URL = 'https://school.skuliug.com';
 
 const links = [
   { href: '/', label: 'Home' },

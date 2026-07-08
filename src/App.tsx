@@ -10,7 +10,6 @@ import PrivacyPage from './pages/PrivacyPage';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import WhatsAppButton from './components/WhatsAppButton';
-import AiWidget from './components/AiWidget';
 import ScrollToTop from './components/ScrollToTop';
 
 export default function App() {
@@ -33,7 +32,6 @@ export default function App() {
         </main>
         <Footer />
         <WhatsAppButton />
-        <AiWidget />
       </div>
     </BrowserRouter>
   );
