@@ -56,8 +56,6 @@ const modules = [
 ];
 
 const upcoming = [
-  { icon: Bell, title: 'Parent SMS Alerts', desc: 'MTN & Airtel SMS to parents for fees and results.' },
-  { icon: Users, title: 'Parent Portal App', desc: 'Parents log in to track fees, marks and messages.' },
   { icon: Layers, title: 'District Dashboard', desc: 'Multi-school oversight for education officers.' },
   { icon: TrendingUp, title: 'Learning Analytics', desc: 'Pupil progress trends term-on-term with AI insights.' },
 ];
