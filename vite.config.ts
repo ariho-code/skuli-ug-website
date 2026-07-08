@@ -9,13 +9,13 @@ export default defineConfig({
     tailwindcss(),
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['skuli-logo.png', 'icon-192.png', 'icon-512.png', 'robots.txt', 'sitemap.xml'],
+      includeAssets: ['favicon.svg', 'apple-touch-icon.png', 'icon-192.png', 'icon-512.png', 'robots.txt', 'sitemap.xml'],
       manifest: {
         name: 'Skuli UG — Uganda School Management',
         short_name: 'Skuli UG',
         description: "Uganda's leading school management system. AI report cards, fees, marks and e-learning — on your phone.",
-        theme_color: '#1a1a1a',
-        background_color: '#1a1a1a',
+        theme_color: '#F5F1EA',
+        background_color: '#F5F1EA',
         display: 'standalone',
         orientation: 'portrait',
         start_url: '/',
@@ -23,17 +23,19 @@ export default defineConfig({
         categories: ['education', 'productivity', 'business'],
         lang: 'en-UG',
         icons: [
-          { src: '/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any maskable' },
-          { src: '/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any maskable' },
-        ],
-        screenshots: [
-          { src: '/skuli-logo.png', sizes: '512x512', type: 'image/png', form_factor: 'wide' },
+          { src: '/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'any' },
+          { src: '/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'any' },
+          { src: '/icon-192.png', sizes: '192x192', type: 'image/png', purpose: 'maskable' },
+          { src: '/icon-512.png', sizes: '512x512', type: 'image/png', purpose: 'maskable' },
         ],
       },
       devOptions: { enabled: true },
       workbox: {
         maximumFileSizeToCacheInBytes: 3000000,
         globPatterns: ['**/*.{js,css,html,ico,png,svg,woff2}'],
+        // The 2 MB marketing/OG raster stays reachable for social crawlers
+        // but never gets precached onto a visitor's phone.
+        globIgnores: ['**/skuli-logo.png'],
         runtimeCaching: [
           {
             urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
