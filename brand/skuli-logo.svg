@@ -1,0 +1,18 @@
+<svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Skuli">
+  <defs>
+    <linearGradient id="skuliGold" x1="6" y1="4" x2="42" y2="44" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FBA24A"></stop>
+      <stop offset="0.55" stop-color="#F57A12"></stop>
+      <stop offset="1" stop-color="#DA6A0C"></stop>
+    </linearGradient>
+  </defs>
+  <rect x="2" y="2" width="44" height="44" rx="13" fill="url(#skuliGold)"></rect>
+  <rect x="2.6" y="2.6" width="42.8" height="42.8" rx="12.4" fill="none" stroke="#FFFFFF" stroke-opacity="0.22" stroke-width="1.2"></rect>
+  
+  <path d="M24 11 L39 18.2 L24 25.4 L9 18.2 Z" fill="#0C2C57"></path>
+  
+  <path d="M16 21.6 V28.4 C16 32.6 32 32.6 32 28.4 V21.6 L24 25.4 Z" fill="#0C2C57" fill-opacity="0.78"></path>
+  
+  <path d="M39 18.2 V29.2" stroke="#0C2C57" stroke-width="2" stroke-linecap="round"></path>
+  <circle cx="39" cy="31.4" r="2.4" fill="#0C2C57"></circle>
+</svg>
