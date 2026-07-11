@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Shield } from 'lucide-react';
+import Seo from '../lib/seo';
+import { breadcrumbJsonLd } from '../lib/jsonld';
 
 const GOLD = '#F57A12';
 const DARK = '#07182F';
@@ -90,6 +92,12 @@ const sections = [
 export default function PrivacyPage() {
   return (
     <div style={{ background: '#fafafa', minHeight: '100vh' }}>
+      <Seo
+        title="Privacy Policy | Skuli UG"
+        description="Learn how Skuli UG collects, uses and protects your school's data, in compliance with Uganda's Data Protection and Privacy Act 2019."
+        path="/privacy"
+        jsonLd={breadcrumbJsonLd([{ name: 'Home', path: '/' }, { name: 'Privacy Policy', path: '/privacy' }])}
+      />
       {/* Hero */}
       <div className="relative overflow-hidden" style={{ background: DARK, paddingTop: 128, paddingBottom: 64 }}>
         <div className="absolute inset-0 grid-bg pointer-events-none" />

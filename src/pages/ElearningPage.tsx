@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { BookOpen, Upload, FileText, MessageSquare, CheckCircle2, Smartphone, Users, Award, ArrowRight } from 'lucide-react';
 import { FadeIn, Eyebrow, GOLD, INK, INK2, CREAM, goldTile } from '../lib/theme';
+import Seo from '../lib/seo';
+import { breadcrumbJsonLd } from '../lib/jsonld';
 
 const features = [
   { icon: Upload, title: 'Share lesson notes', desc: 'Upload PDFs, Word documents, images and videos. Pupils access everything from their phones.' },
@@ -28,6 +30,12 @@ const stats = [
 export default function ElearningPage() {
   return (
     <div style={{ background: INK, color: '#fff' }}>
+      <Seo
+        title="E-Learning Module — Notes, Assignments & Feedback | Skuli UG"
+        description="Skuli UG's e-learning module lets teachers share notes, set assignments and give feedback from their phones — so learning never stops when school closes."
+        path="/e-learning"
+        jsonLd={breadcrumbJsonLd([{ name: 'Home', path: '/' }, { name: 'E-Learning', path: '/e-learning' }])}
+      />
 
       {/* ── HERO ─────────────────────────────── */}
       <section className="relative overflow-hidden pt-28 sm:pt-32 pb-16 sm:pb-20">

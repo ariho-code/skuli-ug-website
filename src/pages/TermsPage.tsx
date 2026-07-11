@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { ArrowLeft, FileText } from 'lucide-react';
+import Seo from '../lib/seo';
+import { breadcrumbJsonLd } from '../lib/jsonld';
 
 const GOLD = '#F57A12';
 const DARK = '#07182F';
@@ -76,6 +78,12 @@ const sections = [
 export default function TermsPage() {
   return (
     <div style={{ background: '#fafafa', minHeight: '100vh' }}>
+      <Seo
+        title="Terms of Service | Skuli UG"
+        description="Read the Terms of Service governing your school's use of the Skuli UG school management platform."
+        path="/terms"
+        jsonLd={breadcrumbJsonLd([{ name: 'Home', path: '/' }, { name: 'Terms of Service', path: '/terms' }])}
+      />
       {/* Hero */}
       <div className="relative overflow-hidden" style={{ background: DARK, paddingTop: 128, paddingBottom: 64 }}>
         <div className="absolute inset-0 grid-bg pointer-events-none" />

@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { Target, Heart, Zap, Globe, ArrowRight, Phone, MapPin, Mail } from 'lucide-react';
 import { FadeIn, Eyebrow, GOLD, INK, INK2, CREAM, PHONE1, PHONE2, SALES_EMAIL, goldTile } from '../lib/theme';
+import Seo from '../lib/seo';
+import { breadcrumbJsonLd } from '../lib/jsonld';
 
 const values = [
   { icon: Target, title: 'Built for Uganda', desc: 'Designed from the ground up for Uganda\'s curriculum, school calendar and three-term structure. Not an import — a local solution.' },
@@ -18,6 +20,12 @@ const storyParagraphs = [
 export default function AboutPage() {
   return (
     <div style={{ background: INK, color: '#fff' }}>
+      <Seo
+        title="About Us — Built in Uganda, for Uganda's Schools | Skuli UG"
+        description="Skuli UG is a Ugandan company building mobile-first school management software for primary schools across Uganda. Learn our story, mission and values."
+        path="/about"
+        jsonLd={breadcrumbJsonLd([{ name: 'Home', path: '/' }, { name: 'About', path: '/about' }])}
+      />
 
       {/* ── HERO ─────────────────────────────── */}
       <section className="relative overflow-hidden pt-28 sm:pt-32 pb-16 sm:pb-20">

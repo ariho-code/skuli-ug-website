@@ -9,6 +9,8 @@ import {
   Smartphone, Brain, Shield, ArrowRight, Phone, Check, Plus,
   Timer, FileX2, Sparkles, MessageCircle,
 } from 'lucide-react';
+import Seo from '../lib/seo';
+import { faqJsonLd } from '../lib/jsonld';
 
 const GOLD = '#F57A12';
 const GOLD_DEEP = '#DA6A0C';
@@ -120,6 +122,12 @@ export default function HomePage() {
 
   return (
     <div style={{ background: INK, color: '#fff' }}>
+      <Seo
+        title="Skuli UG — School Management System for Uganda"
+        description="Skuli UG is Uganda's all-in-one school management system. Report cards, fees, e-learning and AI — all on your teachers' phones. Termly pricing from UGX 150,000."
+        path="/"
+        jsonLd={faqJsonLd(faqs)}
+      />
 
       {/* ── HERO ─────────────────────────────── */}
       <section className="relative flex items-center overflow-hidden pt-28 sm:pt-32 pb-16" style={{ minHeight: '100svh' }}>

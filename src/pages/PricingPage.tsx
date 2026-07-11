@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import { Check, Phone, Code2, ArrowRight, Plus, MessageCircle } from 'lucide-react';
 import { FadeIn, Eyebrow, GOLD, INK, INK2, CREAM, PHONE1, goldTile } from '../lib/theme';
 import { motion } from 'framer-motion';
+import Seo, { SITE_URL } from '../lib/seo';
+import { breadcrumbJsonLd, faqJsonLd } from '../lib/jsonld';
 
 const plans = [
   { name: 'Starter', sub: 'Under 150 pupils', price: '150,000', usd: '$40', hl: false, badge: null, f: ['Report cards & mark sheets', 'Fees tracking & invoicing', 'Up to 5 teacher accounts', 'Mobile app access', 'Email support'] },
@@ -22,11 +24,38 @@ const faqs = [
   { q: 'What is the Custom Build option?', a: 'We build bespoke school management systems tailored to your workflow, branding and specific requirements. Contact us for a quote.' },
 ];
 
+const plansJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: 'Skuli UG School Management System',
+  description: 'Termly subscription plans for Ugandan primary schools — no per-teacher fees, no hidden charges.',
+  brand: { '@type': 'Brand', name: 'Skuli UG' },
+  offers: plans.map(p => ({
+    '@type': 'Offer',
+    name: `${p.name} plan`,
+    price: p.price.replace(/[^0-9]/g, ''),
+    priceCurrency: 'UGX',
+    description: p.sub,
+    url: `${SITE_URL}/pricing`,
+    availability: 'https://schema.org/InStock',
+  })),
+};
+
 export default function PricingPage() {
   const [openFaq, setOpenFaq] = useState<number>(0);
 
   return (
     <div style={{ background: INK, color: '#fff' }}>
+      <Seo
+        title="Pricing — Termly Plans from UGX 150,000 | Skuli UG"
+        description="Simple, transparent termly pricing for Ugandan schools. No per-teacher fees, no hidden charges — plans from UGX 150,000 per term. Compare Starter, Growth, Pro and Enterprise."
+        path="/pricing"
+        jsonLd={[
+          breadcrumbJsonLd([{ name: 'Home', path: '/' }, { name: 'Pricing', path: '/pricing' }]),
+          faqJsonLd(faqs),
+          plansJsonLd,
+        ]}
+      />
 
       {/* ── HERO ─────────────────────────────── */}
       <section className="relative overflow-hidden pt-28 sm:pt-32 pb-16 sm:pb-20">

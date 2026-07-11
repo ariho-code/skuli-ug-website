@@ -5,6 +5,8 @@ import {
   Layers, Clock, Award, ArrowRight, Phone, Check,
 } from 'lucide-react';
 import { FadeIn, Eyebrow, GOLD, GOLD_DEEP, INK, INK2, CREAM, PHONE1, goldTile } from '../lib/theme';
+import Seo from '../lib/seo';
+import { breadcrumbJsonLd } from '../lib/jsonld';
 
 const modules = [
   {
@@ -63,6 +65,12 @@ const upcoming = [
 export default function FeaturesPage() {
   return (
     <div style={{ background: INK, color: '#fff' }}>
+      <Seo
+        title="Features — Report Cards, Fees, E-Learning & AI | Skuli UG"
+        description="Explore every Skuli UG module: AI-powered report cards, mark sheets, fee tracking, e-learning, timetables and staff chat — built for Ugandan primary schools."
+        path="/features"
+        jsonLd={breadcrumbJsonLd([{ name: 'Home', path: '/' }, { name: 'Features', path: '/features' }])}
+      />
 
       {/* ── HERO ─────────────────────────────── */}
       <section className="relative overflow-hidden pt-28 sm:pt-32 pb-16 sm:pb-20">

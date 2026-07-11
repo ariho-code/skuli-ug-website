@@ -8,13 +8,19 @@
     <meta name="keywords" content="school management system Uganda, school ERP Uganda, student management software Uganda, fees management school Uganda, e-learning Uganda, school portal Uganda, Skuli UG" />
     <meta name="author" content="Skuli UG" />
     <meta name="theme-color" content="#07182F" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="geo.region" content="UG" />
+    <meta name="geo.placename" content="Kampala, Uganda" />
     <link rel="canonical" href="https://skuliug.com/" />
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content="en_UG" />
     <meta property="og:url" content="https://skuliug.com/" />
     <meta property="og:title" content="Skuli UG — School Management System for Uganda" />
     <meta property="og:description" content="The all-in-one school management platform built for Ugandan schools. Fees, academics, e-learning, parent access, AI assistant and more." />
     <meta property="og:image" content="https://skuliug.com/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta property="og:site_name" content="Skuli UG" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Skuli UG — School Management System" />
@@ -23,19 +29,58 @@
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "Skuli UG",
-      "applicationCategory": "EducationApplication",
-      "operatingSystem": "Web",
-      "url": "https://skuliug.com",
-      "description": "All-in-one school management system for Ugandan schools.",
-      "author": { "@type": "Organization", "name": "Skuli UG", "url": "https://skuliug.com" }
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": "https://skuliug.com/#organization",
+          "name": "Skuli UG",
+          "url": "https://skuliug.com",
+          "logo": "https://skuliug.com/skuli-emblem.png",
+          "description": "Skuli UG builds all-in-one school management software for Ugandan primary schools — report cards, fees, e-learning and AI, all mobile-first.",
+          "email": "sales@skuliug.com",
+          "address": { "@type": "PostalAddress", "addressLocality": "Kampala", "addressCountry": "UG" },
+          "contactPoint": [
+            { "@type": "ContactPoint", "telephone": "+256-760-730-254", "contactType": "sales", "areaServed": "UG", "availableLanguage": ["en"] }
+          ],
+          "sameAs": ["https://wa.me/256760730254"]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "https://skuliug.com/#website",
+          "url": "https://skuliug.com",
+          "name": "Skuli UG",
+          "publisher": { "@id": "https://skuliug.com/#organization" },
+          "inLanguage": "en"
+        },
+        {
+          "@type": "SoftwareApplication",
+          "@id": "https://skuliug.com/#software",
+          "name": "Skuli UG",
+          "applicationCategory": "EducationApplication",
+          "operatingSystem": "Web, Android, iOS",
+          "url": "https://skuliug.com",
+          "description": "All-in-one school management system for Ugandan primary schools: report cards, fees, e-learning and AI report comments — all on your teachers' phones.",
+          "author": { "@id": "https://skuliug.com/#organization" },
+          "offers": {
+            "@type": "Offer",
+            "price": "150000",
+            "priceCurrency": "UGX",
+            "priceValidUntil": "2027-12-31",
+            "description": "Starter plan, per term, under 150 pupils"
+          }
+        }
+      ]
     }
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
 
     <!-- PWA / installability -->
     <link rel="manifest" href="/manifest.webmanifest" />

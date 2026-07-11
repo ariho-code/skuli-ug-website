@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Phone, Mail, MapPin, MessageCircle, Send, CheckCircle2, ExternalLink } from 'lucide-react';
 import { FadeIn, Eyebrow, GOLD, INK, APP_URL, PHONE1, PHONE2, SALES_EMAIL, goldTile } from '../lib/theme';
+import Seo from '../lib/seo';
+import { breadcrumbJsonLd } from '../lib/jsonld';
 
 function ContactCard({ icon: Icon, title, lines, href, hint }: { icon: typeof Phone; title: string; lines: string[]; href: string | null; hint: string }) {
   return (
@@ -63,6 +65,12 @@ export default function ContactPage() {
 
   return (
     <div style={{ background: INK, color: '#fff' }}>
+      <Seo
+        title="Contact Us — Book a Free Demo | Skuli UG"
+        description="Get in touch with Skuli UG. Call, WhatsApp or email us to book a free demo for your school — we're based in Uganda and respond within 2 hours."
+        path="/contact"
+        jsonLd={breadcrumbJsonLd([{ name: 'Home', path: '/' }, { name: 'Contact', path: '/contact' }])}
+      />
 
       {/* ── HERO ─────────────────────────────── */}
       <section className="relative overflow-hidden pt-28 sm:pt-32 pb-16 sm:pb-20">
