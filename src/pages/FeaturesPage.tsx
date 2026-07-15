@@ -4,7 +4,7 @@ import {
   Brain, BarChart3, Shield, Bell, Smartphone, Calendar, UserCheck,
   Layers, Clock, Award, ArrowRight, Phone, Check,
 } from 'lucide-react';
-import { FadeIn, Eyebrow, GOLD, GOLD_DEEP, INK, INK2, CREAM, PHONE1, goldTile } from '../lib/theme';
+import { FadeIn, Rise, GOLD, GOLD_DEEP, INK, INK2, CREAM, PHONE1, goldTile } from '../lib/theme';
 import Seo from '../lib/seo';
 import { breadcrumbJsonLd } from '../lib/jsonld';
 
@@ -12,7 +12,7 @@ const modules = [
   {
     category: 'Academics',
     items: [
-      { icon: FileText, title: 'AI-Powered Report Cards', desc: 'Automatically generate personalised pupil report cards with AI-written comments. Enter marks — the system does the writing.', badge: 'AI' },
+      { icon: FileText, title: 'AI Report Cards', desc: 'Generate personalised pupil report cards with comments written for you. Enter the marks and the system does the writing.', badge: 'AI' },
       { icon: TrendingUp, title: 'Mark Sheets & Grade Books', desc: 'Digital mark entry per subject per class. Automatic aggregates, positions and grade labels calculated instantly.' },
       { icon: Calendar, title: 'Timetable Management', desc: 'Build and publish class timetables. Teachers see their schedule on their phone every day.' },
       { icon: UserCheck, title: 'Student Promotion', desc: 'Review academic performance and promote students to the next class at end of term automatically.' },
@@ -52,7 +52,7 @@ const modules = [
     items: [
       { icon: Brain, title: 'Skuli AI', desc: 'Built-in AI assistant that helps teachers write comments, answers questions about the system and provides insights.' },
       { icon: Smartphone, title: 'Mobile First', desc: 'Works on any Android or iPhone. No computer lab needed. Teachers use their own phones.' },
-      { icon: Shield, title: 'Role-Based Security', desc: 'Each staff member sees only what they need. Headteachers, teachers, bursars — all have the right access.' },
+      { icon: Shield, title: 'Role-Based Security', desc: 'Each staff member sees only what they need. Headteachers, teachers and bursars all get the right level of access.' },
     ],
   },
 ];
@@ -66,25 +66,27 @@ export default function FeaturesPage() {
   return (
     <div style={{ background: INK, color: '#fff' }}>
       <Seo
-        title="Features — Report Cards, Fees, E-Learning & AI | Skuli UG"
-        description="Explore every Skuli UG module: AI-powered report cards, mark sheets, fee tracking, e-learning, timetables and staff chat — built for Ugandan primary schools."
+        title="Features | Report Cards, Fees, E-Learning & AI | Skuli UG"
+        description="Explore every Skuli UG module: AI report cards, mark sheets, fee tracking, e-learning, timetables and staff chat, built for Ugandan primary schools."
         path="/features"
         jsonLd={breadcrumbJsonLd([{ name: 'Home', path: '/' }, { name: 'Features', path: '/features' }])}
       />
 
-      {/* ── HERO ─────────────────────────────── */}
+      {/* Hero */}
       <section className="relative overflow-hidden pt-28 sm:pt-32 pb-16 sm:pb-20">
         <div className="absolute inset-0 grid-bg pointer-events-none" />
-        <div className="glow absolute -top-32 right-[-10%] w-[560px] h-[560px] rounded-full pointer-events-none"
+        <div className="grain" />
+        <div className="aurora absolute -top-32 right-[-10%] w-[560px] h-[560px] rounded-full pointer-events-none"
           style={{ background: 'radial-gradient(circle at 60% 40%, rgba(245,122,18,.3), transparent 65%)' }} />
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <FadeIn>
-            <Eyebrow>FULL FEATURE SET</Eyebrow>
+          <Rise>
             <h1 className="font-display font-extrabold tracking-tight leading-[1.05] text-balance mb-5" style={{ fontSize: 'clamp(2.3rem,6vw,3.8rem)' }}>
               Everything your <span className="gold-text">school</span> needs
             </h1>
+          </Rise>
+          <FadeIn delay={0.15}>
             <p className="text-pretty text-white/60 mx-auto mb-8 max-w-2xl" style={{ fontSize: 'clamp(1rem,1.6vw,1.15rem)', lineHeight: 1.65 }}>
-              From student admissions to AI-powered report cards — every module you need to run a modern Ugandan primary school, on one platform.
+              Every module a modern Ugandan primary school needs, from student admissions to report cards, on one platform.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link to="/contact" className="btn-gold flex items-center justify-center gap-2 px-7 py-4 rounded-2xl font-bold text-[15px]">
@@ -98,13 +100,14 @@ export default function FeaturesPage() {
         </div>
       </section>
 
-      {/* ── MODULES (LIGHT) ─────────────────── */}
+      {/* Modules (Light) */}
       <section className="py-16 sm:py-24" style={{ background: CREAM, color: '#0C2C57' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14 sm:space-y-16">
-          {modules.map((section, si) => (
+          {modules.map(section => (
             <div key={section.category}>
               <FadeIn className="mb-6 sm:mb-7">
-                <div className="text-xs font-bold uppercase tracking-[0.2em]" style={{ color: GOLD_DEEP }}>{String(si + 1).padStart(2, '0')} · {section.category}</div>
+                <h2 className="font-display font-extrabold text-2xl sm:text-[1.7rem] tracking-tight" style={{ color: '#0C2C57' }}>{section.category}</h2>
+                <div className="mt-2.5 h-[3px] w-10 rounded-full" style={{ background: GOLD_DEEP }} />
               </FadeIn>
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
                 {section.items.map((item, i) => (
@@ -129,20 +132,19 @@ export default function FeaturesPage() {
         </div>
       </section>
 
-      {/* ── COMING SOON ──────────────────────── */}
+      {/* Coming Soon */}
       <section className="py-20 sm:py-28 relative overflow-hidden" style={{ background: INK }}>
         <div className="absolute top-1/2 left-1/2 w-[700px] h-[700px] rounded-full pointer-events-none" style={{ transform: 'translate(-50%,-50%)', background: 'radial-gradient(circle, rgba(245,122,18,.07), transparent 70%)' }} />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <FadeIn className="text-center max-w-2xl mx-auto mb-12">
-            <div className="text-xs font-bold uppercase tracking-[0.2em] mb-4" style={{ color: GOLD }}>Coming soon</div>
+          <Rise className="text-center max-w-2xl mx-auto mb-12">
             <h2 className="font-display font-extrabold tracking-tight text-balance" style={{ fontSize: 'clamp(2rem,4.5vw,3.2rem)', lineHeight: 1.05 }}>What we're building next</h2>
-          </FadeIn>
+          </Rise>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
             {upcoming.map((f, i) => (
               <FadeIn key={f.title} delay={i * 0.07}>
                 <div className="card-hover rounded-3xl p-6 h-full" style={{ background: 'rgba(255,255,255,0.035)', border: '1px solid rgba(255,255,255,0.08)' }}>
-                  <span className="inline-block px-2.5 py-1 rounded-lg text-[11px] font-bold mb-4" style={{ background: 'rgba(245,122,18,0.12)', color: GOLD }}>
-                    COMING SOON
+                  <span className="inline-block text-[12px] font-semibold mb-4" style={{ color: GOLD }}>
+                    In development
                   </span>
                   <div className="w-11 h-11 rounded-2xl grid place-items-center mb-4" style={{ background: 'rgba(255,255,255,0.06)' }}>
                     <f.icon className="w-5 h-5" style={{ color: 'rgba(255,255,255,0.45)' }} />
@@ -156,7 +158,7 @@ export default function FeaturesPage() {
         </div>
       </section>
 
-      {/* ── FINAL CTA ───────────────────────── */}
+      {/* Final Cta */}
       <section className="py-20 sm:py-28 relative overflow-hidden" style={{ background: `linear-gradient(180deg, ${INK2}, ${INK})` }}>
         <div className="glow absolute top-0 left-1/2 -translate-x-1/2 w-[700px] h-[400px] rounded-full pointer-events-none" style={{ background: 'radial-gradient(ellipse at center, rgba(245,122,18,.18), transparent 70%)' }} />
         <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">

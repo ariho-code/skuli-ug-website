@@ -40,24 +40,25 @@ body {
 /* Selection */
 ::selection { background: rgba(245,122,18,0.3); color: #fff; }
 
+/* Keyboard focus */
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; border-radius: 4px; }
+
 /* ---------- Animations ---------- */
-@keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
-@keyframes floaty2 { 0%,100% { transform: translateY(0) rotate(-2deg); } 50% { transform: translateY(-18px) rotate(-2deg); } }
-@keyframes glowpulse { 0%,100% { opacity:.55; transform: scale(1); } 50% { opacity:.85; transform: scale(1.08); } }
-@keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
-@keyframes spinslow { to { transform: rotate(360deg); } }
-@keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0; } }
+@keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes glowpulse { 0%,100% { opacity:.55; transform: scale(1); } 50% { opacity:.8; transform: scale(1.06); } }
+@keyframes auroradrift {
+  0%,100% { transform: translate(0, 0) scale(1); }
+  33%     { transform: translate(4%, -3%) scale(1.06); }
+  66%     { transform: translate(-3%, 2%) scale(0.97); }
+}
 @keyframes scrollx { to { transform: translateX(-50%); } }
 
 @media (prefers-reduced-motion: no-preference) {
-  .float { animation: floaty 6s ease-in-out infinite; }
-  .float2 { animation: floaty2 7.5s ease-in-out infinite; }
-  .glow { animation: glowpulse 7s ease-in-out infinite; }
-  .ring-spin { animation: spinslow 14s linear infinite; }
+  .float { animation: floaty 7s ease-in-out infinite; }
+  .glow { animation: glowpulse 8s ease-in-out infinite; }
+  .aurora { animation: auroradrift 18s ease-in-out infinite; }
   .marquee-track { animation: scrollx 30s linear infinite; }
 }
-
-.caret { display:inline-block; width:3px; height:1em; background: var(--gold); margin-left:2px; transform: translateY(2px); animation: blink 1s step-end infinite; }
 
 /* ---------- Brand helpers ---------- */
 .gold-text {
@@ -74,18 +75,50 @@ body {
   mask-image: radial-gradient(ellipse 80% 70% at 50% 0%, #000 30%, transparent 75%);
 }
 
-.card-hover { transition: transform .35s cubic-bezier(.22,1,.36,1), border-color .35s, box-shadow .35s; }
-.card-hover:hover { transform: translateY(-6px); }
+/* Film-grain overlay: breaks up the flat gradient look on dark sections */
+.grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 160px 160px;
+}
 
+/* ---------- Cards ---------- */
+.card-hover {
+  transition: transform .4s cubic-bezier(.22,1,.36,1), border-color .4s, box-shadow .4s;
+}
+.card-hover:hover {
+  transform: translateY(-5px);
+  border-color: rgba(245,122,18,0.35) !important;
+  box-shadow: 0 18px 45px -18px rgba(245,122,18,0.25);
+}
+
+/* ---------- Buttons ---------- */
 .btn-gold {
+  position: relative;
+  overflow: hidden;
   background: linear-gradient(180deg, var(--gold-light), var(--gold) 55%, var(--gold-deep));
   color: #0C2C57;
   box-shadow: 0 10px 30px -8px rgba(245,122,18,.5), inset 0 1px 0 rgba(255,255,255,.4);
   transition: transform .25s, box-shadow .25s, filter .25s;
 }
-.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 16px 40px -10px rgba(245,122,18,.65), inset 0 1px 0 rgba(255,255,255,.5); filter: brightness(1.04); }
+.btn-gold::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 30%, rgba(255,255,255,.55) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform .6s cubic-bezier(.22,1,.36,1);
+  pointer-events: none;
+}
+.btn-gold:hover { transform: translateY(-2px); box-shadow: 0 16px 40px -10px rgba(245,122,18,.65), inset 0 1px 0 rgba(255,255,255,.5); }
+.btn-gold:hover::after { transform: translateX(120%); }
+.btn-gold:active { transform: translateY(0) scale(0.98); }
 
 .btn-ghost { transition: background .25s, border-color .25s, transform .25s; }
-.btn-ghost:hover { transform: translateY(-2px); }
+.btn-ghost:hover { transform: translateY(-2px); border-color: rgba(245,122,18,0.4) !important; }
+.btn-ghost:active { transform: translateY(0) scale(0.98); }
 
 .phone-shadow { box-shadow: 0 50px 100px -30px rgba(0,0,0,.8), 0 0 0 1px rgba(255,255,255,.06); }

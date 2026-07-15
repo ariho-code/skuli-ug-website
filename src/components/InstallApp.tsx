@@ -16,7 +16,7 @@ export default function InstallApp() {
       <div className="flex-1">
         <h3 className="font-display font-bold text-white text-[15px] sm:text-base mb-1">Install Skuli UG on this device</h3>
         {canInstall ? (
-          <p className="text-sm text-white/55">Add it to your home screen or desktop for one-tap access — no app store needed.</p>
+          <p className="text-sm text-white/55">Add it to your home screen or desktop for one-tap access. No app store needed.</p>
         ) : (
           <p className="text-sm text-white/55 flex flex-wrap items-center gap-1.5">
             On iPhone / iPad: tap <Share className="w-3.5 h-3.5 inline-block flex-shrink-0" style={{ color: GOLD }} /> Share, then

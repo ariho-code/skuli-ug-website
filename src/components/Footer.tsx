@@ -63,7 +63,7 @@ export default function Footer() {
 
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-x-6 gap-y-10 sm:gap-x-8 lg:gap-10 mb-10 sm:mb-12">
 
-          {/* Brand — full-width row until desktop */}
+          {/* Brand: full-width row until desktop */}
           <div className="col-span-2 lg:col-span-2 lg:max-w-xs">
             <div className="flex items-center gap-2.5 mb-4">
               <SkuliMark size={36} />
@@ -123,7 +123,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact — full-width row on mobile/tablet */}
+          {/* Contact: full-width row on mobile/tablet */}
           <div className="col-span-2 lg:col-span-1">
             <h3 className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: GOLD }}>Contact</h3>
             <ul className="grid grid-cols-2 lg:grid-cols-1 gap-3 lg:gap-2.5 text-sm text-white/50">

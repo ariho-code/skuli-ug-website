@@ -15,7 +15,7 @@ const sections = [
   },
   {
     title: '2. Description of Service',
-    body: `Skuli UG is a cloud-based school management platform providing tools for student records, marks entry, fee management, report card generation, timetabling, staff management, and AI-powered analytics. The Service is provided on a subscription basis.`,
+    body: `Skuli UG is a cloud-based school management platform providing tools for student records, marks entry, fee management, report card generation, timetabling, staff management, and analytics. The Service is provided on a subscription basis.`,
   },
   {
     title: '3. Account Registration',

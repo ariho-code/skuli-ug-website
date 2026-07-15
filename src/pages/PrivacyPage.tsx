@@ -39,7 +39,7 @@ const sections = [
     bullets: [
       'HTTPS/TLS encryption for all data in transit.',
       'Password hashing using bcrypt (no plain-text passwords stored).',
-      'Role-based access control — staff only access data relevant to their role.',
+      'Role-based access control, so staff only access data relevant to their role.',
       'Single-device session enforcement to prevent unauthorised sharing.',
       'Regular backups and disaster recovery procedures.',
     ],
@@ -54,7 +54,7 @@ const sections = [
   },
   {
     title: '6. Cookies',
-    body: `The Skuli UG application uses session storage and local storage to maintain authentication state. We do not use third-party tracking cookies. The marketing website may use minimal analytics to understand visitor behaviour (page views only — no personal identification).`,
+    body: `The Skuli UG application uses session storage and local storage to maintain authentication state. We do not use third-party tracking cookies. The marketing website may use minimal analytics to understand visitor behaviour (page views only, with no personal identification).`,
   },
   {
     title: '7. Your Rights',
@@ -74,9 +74,9 @@ const sections = [
     title: '9. Third-Party Services',
     body: 'We use the following third-party services to operate the platform:',
     bullets: [
-      'Email delivery — for OTP and notification emails.',
-      'Cloud hosting — for platform infrastructure.',
-      'AI API — for Skuli AI features (no personal student data shared).',
+      'Email delivery, for OTP and notification emails.',
+      'Cloud hosting, for platform infrastructure.',
+      'AI services, for Skuli AI features (no personal student data shared).',
     ],
   },
   {

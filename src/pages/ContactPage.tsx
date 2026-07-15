@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Phone, Mail, MapPin, MessageCircle, Send, CheckCircle2, ExternalLink } from 'lucide-react';
-import { FadeIn, Eyebrow, GOLD, INK, APP_URL, PHONE1, PHONE2, SALES_EMAIL, goldTile } from '../lib/theme';
+import { FadeIn, Rise, GOLD, INK, APP_URL, PHONE1, PHONE2, SALES_EMAIL, goldTile } from '../lib/theme';
 import Seo from '../lib/seo';
 import { breadcrumbJsonLd } from '../lib/jsonld';
 
@@ -66,23 +66,25 @@ export default function ContactPage() {
   return (
     <div style={{ background: INK, color: '#fff' }}>
       <Seo
-        title="Contact Us — Book a Free Demo | Skuli UG"
-        description="Get in touch with Skuli UG. Call, WhatsApp or email us to book a free demo for your school — we're based in Uganda and respond within 2 hours."
+        title="Contact Us | Book a Free Demo | Skuli UG"
+        description="Get in touch with Skuli UG. Call, WhatsApp or email us to book a free demo for your school. We're based in Uganda and respond within 2 hours."
         path="/contact"
         jsonLd={breadcrumbJsonLd([{ name: 'Home', path: '/' }, { name: 'Contact', path: '/contact' }])}
       />
 
-      {/* ── HERO ─────────────────────────────── */}
+      {/* Hero */}
       <section className="relative overflow-hidden pt-28 sm:pt-32 pb-16 sm:pb-20">
         <div className="absolute inset-0 grid-bg pointer-events-none" />
-        <div className="glow absolute -top-32 right-[-10%] w-[560px] h-[560px] rounded-full pointer-events-none"
+        <div className="grain" />
+        <div className="aurora absolute -top-32 right-[-10%] w-[560px] h-[560px] rounded-full pointer-events-none"
           style={{ background: 'radial-gradient(circle at 60% 40%, rgba(245,122,18,.3), transparent 65%)' }} />
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <FadeIn>
-            <Eyebrow>CONTACT US</Eyebrow>
+          <Rise>
             <h1 className="font-display font-extrabold tracking-tight leading-[1.05] text-balance mb-5" style={{ fontSize: 'clamp(2.3rem,6vw,3.8rem)' }}>
               Let's talk about <span className="gold-text">your school</span>
             </h1>
+          </Rise>
+          <FadeIn delay={0.15}>
             <p className="text-pretty text-white/60 max-w-xl" style={{ fontSize: 'clamp(1rem,1.6vw,1.15rem)', lineHeight: 1.65 }}>
               Book a free demo, ask a question or discuss a custom build. We're based in Uganda and respond fast.
             </p>
@@ -90,11 +92,11 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* ── MAIN GRID ────────────────────────── */}
+      {/* Main Grid */}
       <section className="pb-20 sm:pb-28">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-6 sm:gap-8">
 
-          {/* Left — contact info */}
+          {/* Contact info */}
           <FadeIn>
             <div className="space-y-4">
               <ContactCard icon={Phone} title="Call or WhatsApp" lines={[PHONE1, PHONE2]} href={`tel:${PHONE1.replace(/\s/g, '')}`} hint="Mon – Sat, 8am – 8pm" />
@@ -110,7 +112,7 @@ export default function ContactPage() {
                 </div>
                 <div className="flex-1">
                   <div className="font-display font-bold text-white">WhatsApp us directly</div>
-                  <div className="text-sm text-white/55">Fastest way to reach us — tap to chat</div>
+                  <div className="text-sm text-white/55">The fastest way to reach us. Tap to chat.</div>
                 </div>
                 <ExternalLink className="w-4 h-4 text-white/30" />
               </a>
@@ -128,7 +130,7 @@ export default function ContactPage() {
             </div>
           </FadeIn>
 
-          {/* Right — form */}
+          {/* Form */}
           <FadeIn delay={0.1}>
             <div className="rounded-3xl p-7 sm:p-8" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
               <h2 className="font-display text-xl font-bold text-white mb-1">Send us a message</h2>
@@ -146,30 +148,30 @@ export default function ContactPage() {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold text-white/50 mb-1.5 uppercase tracking-wider">Your Name *</label>
+                      <label className="block text-[13px] font-medium text-white/60 mb-1.5">Your name *</label>
                       <input name="name" value={form.name} onChange={handleChange} required style={inputStyle} placeholder="John Ssekitto"
                         onFocus={e => (e.currentTarget.style.borderColor = GOLD)} onBlur={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)')} />
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-white/50 mb-1.5 uppercase tracking-wider">School Name</label>
+                      <label className="block text-[13px] font-medium text-white/60 mb-1.5">School name</label>
                       <input name="school" value={form.school} onChange={handleChange} style={inputStyle} placeholder="Kampala Primary School"
                         onFocus={e => (e.currentTarget.style.borderColor = GOLD)} onBlur={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)')} />
                     </div>
                   </div>
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-semibold text-white/50 mb-1.5 uppercase tracking-wider">Email Address *</label>
+                      <label className="block text-[13px] font-medium text-white/60 mb-1.5">Email address *</label>
                       <input name="email" type="email" value={form.email} onChange={handleChange} required style={inputStyle} placeholder="you@school.ug"
                         onFocus={e => (e.currentTarget.style.borderColor = GOLD)} onBlur={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)')} />
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-white/50 mb-1.5 uppercase tracking-wider">Phone / WhatsApp</label>
+                      <label className="block text-[13px] font-medium text-white/60 mb-1.5">Phone / WhatsApp</label>
                       <input name="phone" value={form.phone} onChange={handleChange} style={inputStyle} placeholder="+256 7xx xxx xxx"
                         onFocus={e => (e.currentTarget.style.borderColor = GOLD)} onBlur={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)')} />
                     </div>
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-white/50 mb-1.5 uppercase tracking-wider">Subject</label>
+                    <label className="block text-[13px] font-medium text-white/60 mb-1.5">Subject</label>
                     <select name="subject" value={form.subject} onChange={handleChange} style={{ ...inputStyle, cursor: 'pointer' }}>
                       <option value="">Select a subject…</option>
                       <option value="Free Demo Request">Free Demo Request</option>
@@ -180,7 +182,7 @@ export default function ContactPage() {
                     </select>
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-white/50 mb-1.5 uppercase tracking-wider">Message *</label>
+                    <label className="block text-[13px] font-medium text-white/60 mb-1.5">Message *</label>
                     <textarea name="message" value={form.message} onChange={handleChange} required rows={5} style={{ ...inputStyle, resize: 'vertical' }}
                       placeholder="Tell us about your school, how many pupils, and what you're looking for…"
                       onFocus={e => (e.currentTarget.style.borderColor = GOLD)} onBlur={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)')} />
