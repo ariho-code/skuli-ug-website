@@ -1,6 +1,8 @@
 import { useState } from 'react';
-import { Phone, Mail, MapPin, MessageCircle, Send, CheckCircle2, ExternalLink } from 'lucide-react';
-import { FadeIn, Rise, GOLD, INK, APP_URL, PHONE1, PHONE2, SALES_EMAIL, goldTile } from '../lib/theme';
+import { Phone, Mail, MapPin, MessageCircle, Send, CheckCircle2, ExternalLink, Backpack, GraduationCap, ArrowUpRight, LockKeyhole } from 'lucide-react';
+import { FadeIn, Rise, GOLD, INK, PHONE1, PHONE2, SALES_EMAIL, goldTile } from '../lib/theme';
+import { PORTALS, isLive, loginUrl } from '../lib/portals';
+import { Link } from 'react-router-dom';
 import Seo from '../lib/seo';
 import { breadcrumbJsonLd } from '../lib/jsonld';
 
@@ -26,7 +28,7 @@ function ContactCard({ icon: Icon, title, lines, href, hint }: { icon: typeof Ph
 }
 
 export default function ContactPage() {
-  const [form, setForm] = useState({ name: '', school: '', email: '', phone: '', subject: '', message: '' });
+  const [form, setForm] = useState({ name: '', school: '', level: '', email: '', phone: '', subject: '', message: '' });
   const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -43,7 +45,7 @@ export default function ContactPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       });
-      if (res.ok) { setStatus('sent'); setForm({ name: '', school: '', email: '', phone: '', subject: '', message: '' }); }
+      if (res.ok) { setStatus('sent'); setForm({ name: '', school: '', level: '', email: '', phone: '', subject: '', message: '' }); }
       else setStatus('error');
     } catch {
       // Fallback: open email client
@@ -67,7 +69,7 @@ export default function ContactPage() {
     <div style={{ background: INK, color: '#fff' }}>
       <Seo
         title="Contact Us | Book a Free Demo | Skuli UG"
-        description="Get in touch with Skuli UG. Call, WhatsApp or email us to book a free demo for your school. We're based in Uganda and respond within 2 hours."
+        description="Get in touch with Skuli UG. Call, WhatsApp or email us to book a free demo for your primary or secondary school. We're based in Uganda and respond within 2 hours."
         path="/contact"
         jsonLd={breadcrumbJsonLd([{ name: 'Home', path: '/' }, { name: 'Contact', path: '/contact' }])}
       />
@@ -86,7 +88,7 @@ export default function ContactPage() {
           </Rise>
           <FadeIn delay={0.15}>
             <p className="text-pretty text-white/60 max-w-xl" style={{ fontSize: 'clamp(1rem,1.6vw,1.15rem)', lineHeight: 1.65 }}>
-              Book a free demo, ask a question or discuss a custom build. We're based in Uganda and respond fast.
+              Book a free demo, ask a question or discuss a custom build. Primary, secondary or both — we're based in Uganda and we respond fast.
             </p>
           </FadeIn>
         </div>
@@ -117,16 +119,36 @@ export default function ContactPage() {
                 <ExternalLink className="w-4 h-4 text-white/30" />
               </a>
 
-              {/* Demo quick link */}
-              <a href={`${APP_URL}/login`}
-                className="card-hover flex items-center justify-between rounded-3xl p-6"
-                style={{ background: 'rgba(245,122,18,0.07)', border: '1px solid rgba(245,122,18,0.2)' }}>
-                <div>
-                  <div className="font-display font-bold text-white mb-0.5">Access the demo</div>
-                  <div className="text-sm text-white/50">Try the live platform right now</div>
+              {/* School portals */}
+              <div className="rounded-3xl p-6" style={{ background: 'rgba(245,122,18,0.07)', border: '1px solid rgba(245,122,18,0.2)' }}>
+                <div className="font-display font-bold text-white mb-0.5">Already a Skuli school?</div>
+                <div className="text-sm text-white/50 mb-4">Sign in to the system your section runs on.</div>
+                <div className="space-y-2.5">
+                  {PORTALS.map(p => {
+                    const Icon = p.key === 'primary' ? Backpack : GraduationCap;
+                    const live = isLive(p);
+                    const inner = (
+                      <>
+                        <span className="w-9 h-9 rounded-xl grid place-items-center flex-shrink-0" style={{ background: 'rgba(245,122,18,0.14)' }}>
+                          <Icon className="w-[18px] h-[18px]" style={{ color: GOLD }} />
+                        </span>
+                        <span className="min-w-0 flex-1">
+                          <span className="block text-sm font-semibold text-white/90 truncate">{p.name}</span>
+                          <span className="block text-[11.5px] text-white/40 truncate">{p.levels}</span>
+                        </span>
+                        {live
+                          ? <ArrowUpRight className="w-4 h-4 flex-shrink-0" style={{ color: GOLD }} />
+                          : <LockKeyhole className="w-3.5 h-3.5 flex-shrink-0 text-white/35" />}
+                      </>
+                    );
+                    const cls = 'flex items-center gap-3 rounded-2xl px-4 py-3';
+                    const st = { background: 'rgba(255,255,255,0.05)', border: '1px solid rgba(255,255,255,0.09)' };
+                    return live
+                      ? <a key={p.key} href={loginUrl(p)} target="_blank" rel="noreferrer" className={cls} style={st}>{inner}</a>
+                      : <Link key={p.key} to={loginUrl(p)} className={cls} style={st}>{inner}</Link>;
+                  })}
                 </div>
-                <ExternalLink className="w-4 h-4" style={{ color: GOLD }} />
-              </a>
+              </div>
             </div>
           </FadeIn>
 
@@ -158,6 +180,15 @@ export default function ContactPage() {
                         onFocus={e => (e.currentTarget.style.borderColor = GOLD)} onBlur={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)')} />
                     </div>
                   </div>
+                  <div>
+                    <label className="block text-[13px] font-medium text-white/60 mb-1.5">Which sections do you run? *</label>
+                    <select name="level" value={form.level} onChange={handleChange} required style={{ ...inputStyle, cursor: 'pointer' }}>
+                      <option value="">Select your school level…</option>
+                      <option value="Primary">Primary only (Nursery – P7)</option>
+                      <option value="Secondary">Secondary only (S1 – S6)</option>
+                      <option value="Both">Both a primary and a secondary section</option>
+                    </select>
+                  </div>
                   <div className="grid sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-[13px] font-medium text-white/60 mb-1.5">Email address *</label>
@@ -184,7 +215,7 @@ export default function ContactPage() {
                   <div>
                     <label className="block text-[13px] font-medium text-white/60 mb-1.5">Message *</label>
                     <textarea name="message" value={form.message} onChange={handleChange} required rows={5} style={{ ...inputStyle, resize: 'vertical' }}
-                      placeholder="Tell us about your school, how many pupils, and what you're looking for…"
+                      placeholder="Tell us about your school, how many learners, and what you're looking for…"
                       onFocus={e => (e.currentTarget.style.borderColor = GOLD)} onBlur={e => (e.currentTarget.style.borderColor = 'rgba(255,255,255,0.12)')} />
                   </div>
                   {status === 'error' && (

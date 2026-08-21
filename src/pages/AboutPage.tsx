@@ -1,11 +1,13 @@
 import { Link } from 'react-router-dom';
 import { Target, Heart, Zap, Globe, ArrowRight, Phone, MapPin, Mail } from 'lucide-react';
 import { FadeIn, Rise, GOLD, INK, INK2, CREAM, PHONE1, PHONE2, SALES_EMAIL, goldTile } from '../lib/theme';
+import TrustedBy from '../components/TrustedBy';
 import Seo from '../lib/seo';
 import { breadcrumbJsonLd } from '../lib/jsonld';
 
 const values = [
   { icon: Target, title: 'Built for Uganda', desc: 'Designed from the ground up for Uganda\'s curriculum, school calendar and three-term structure. Not an import, but a local solution.' },
+  { icon: Globe, title: 'Primary and secondary', desc: 'Two purpose-built systems rather than one stretched template: aggregates and divisions at primary, combinations and principal passes at secondary.' },
   { icon: Zap, title: 'Mobile first', desc: 'Teachers use their own phones. No computer labs, no reliable WiFi required. Runs on 4G and 3G data.' },
   { icon: Heart, title: 'Accessible pricing', desc: 'Termly pricing that every school can afford. From UGX 150,000 per term, less than the cost of printing report cards.' },
   { icon: Globe, title: 'Always evolving', desc: 'We ship new features every term based on direct feedback from headteachers and teachers on the ground.' },
@@ -14,6 +16,7 @@ const values = [
 const storyParagraphs = [
   'Every end-of-term in Uganda, teachers spend entire weekends writing report cards by hand or formatting Excel files. Headteachers chase parents for fees using notebooks. Academic records live in filing cabinets that can flood, burn or get lost.',
   'We built Skuli UG to change that. Our platform gives every school, whatever its size or budget, professional school management tools that actually work on Uganda\'s network conditions and on the devices teachers already own.',
+  'We started with primary schools, and then did the harder thing: rather than stretching that same system over secondary, we built a second one. Skuli Secondary understands subject combinations, principal passes and UACE points the way Skuli Primary understands aggregates and divisions. Same platform, same support, two systems that each behave correctly.',
   'Our AI automatically writes personalised report comments per pupil. Our fee tracker tells you exactly who owes what in seconds. Our e-learning module means learning doesn\'t stop when schools close.',
 ];
 
@@ -22,7 +25,7 @@ export default function AboutPage() {
     <div style={{ background: INK, color: '#fff' }}>
       <Seo
         title="About Us | Built in Uganda, for Uganda's Schools | Skuli UG"
-        description="Skuli UG is a Ugandan company building mobile-first school management software for primary schools across Uganda. Learn our story, mission and values."
+        description="Skuli UG is a Ugandan company building mobile-first school management software for primary and secondary schools across Uganda. Learn our story, mission and values."
         path="/about"
         jsonLd={breadcrumbJsonLd([{ name: 'Home', path: '/' }, { name: 'About', path: '/about' }])}
       />
@@ -41,7 +44,7 @@ export default function AboutPage() {
           </Rise>
           <FadeIn delay={0.15}>
             <p className="text-pretty text-white/60 max-w-2xl" style={{ fontSize: 'clamp(1rem,1.6vw,1.15rem)', lineHeight: 1.65 }}>
-              Skuli UG is a Ugandan company building software that helps primary schools manage students, fees, academics and communication from a smartphone. We were founded because we saw how much time teachers waste on paperwork that should take seconds.
+              Skuli UG is a Ugandan company building software that helps primary and secondary schools manage learners, fees, academics and communication from a smartphone. We were founded because we saw how much time teachers waste on paperwork that should take seconds.
             </p>
           </FadeIn>
         </div>
@@ -69,7 +72,7 @@ export default function AboutPage() {
             <div className="card-hover rounded-3xl p-7 h-full" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)' }}>
               <h3 className="font-display font-bold text-base mb-3" style={{ color: GOLD }}>Our mission</h3>
               <p className="font-display text-white text-xl font-semibold leading-relaxed text-balance">
-                To make professional school management accessible to every school in Uganda, whatever its size, location or technical expertise.
+                To make professional school management accessible to every school in Uganda, primary or secondary, whatever its size, location or technical expertise.
               </p>
             </div>
           </FadeIn>
@@ -104,6 +107,15 @@ export default function AboutPage() {
             ))}
           </div>
         </div>
+      </section>
+
+      {/* Trusted by */}
+      <section className="py-16 sm:py-24" style={{ background: INK }}>
+        <TrustedBy
+          tone="dark"
+          heading="The schools we work with"
+          intro="We would rather name the schools that trust us than print a wall of logos. Here is who is live on Skuli right now."
+        />
       </section>
 
       {/* Final Cta */}

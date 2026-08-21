@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
-import { Phone, Mail, MapPin, ExternalLink } from 'lucide-react';
+import { Phone, Mail, MapPin, Backpack, GraduationCap, ArrowUpRight } from 'lucide-react';
 import { SkuliMark } from './Navbar';
 import InstallApp from './InstallApp';
+import { PORTALS, isLive, loginUrl } from '../lib/portals';
 
 const GOLD = '#F57A12';
 const INK = '#0B2242';
@@ -9,14 +10,12 @@ const INK = '#0B2242';
 const PHONE1 = '+256 760 730 254';
 const PHONE2 = '+256 709 234 352';
 const SALES_EMAIL = 'sales@skuliug.com';
-const APP_URL = 'https://school.skuliug.com';
 
 const platformLinks = [
+  { to: '/systems', label: 'Our Systems' },
   { to: '/features', label: 'Features' },
   { to: '/pricing', label: 'Pricing' },
   { to: '/e-learning', label: 'E-Learning' },
-  { href: `${APP_URL}/login`, label: 'Log In', external: true },
-  { href: `${APP_URL}/login`, label: 'Get Started Free', external: true },
 ];
 
 const companyLinks = [
@@ -25,6 +24,8 @@ const companyLinks = [
   { to: '/contact', label: 'Request a Demo' },
   { to: '/contact', label: 'Custom Build' },
 ];
+
+const portalIcon = { primary: Backpack, secondary: GraduationCap } as const;
 
 const contactRows = [
   { icon: Phone, label: PHONE1, href: `tel:${PHONE1.replace(/\s/g, '')}` },
@@ -73,7 +74,7 @@ export default function Footer() {
               </span>
             </div>
             <p className="text-sm text-white/45 leading-relaxed mb-5 max-w-sm">
-              The all-in-one school management platform built for Uganda's primary schools.
+              The all-in-one school management platform built for Uganda's primary and secondary schools.
             </p>
             <div className="flex gap-2 mb-6">
               <a href="https://wa.me/256760730254" target="_blank" rel="noreferrer" className="w-10 h-10 sm:w-9 sm:h-9 rounded-xl grid place-items-center bg-white/5 hover:bg-white/10 active:bg-white/15 transition" aria-label="WhatsApp">
@@ -105,9 +106,7 @@ export default function Footer() {
             <ul className="space-y-3 sm:space-y-2.5">
               {platformLinks.map(l => (
                 <li key={l.label}>
-                  {'href' in l
-                    ? <a href={l.href} target="_blank" rel="noreferrer" className="flex items-center gap-1.5 text-sm text-white/50 hover:text-white transition-colors">{l.label} {l.external && <ExternalLink className="w-3 h-3" />}</a>
-                    : <Link to={l.to!} className="text-sm text-white/50 hover:text-white transition-colors">{l.label}</Link>}
+                  <Link to={l.to} className="text-sm text-white/50 hover:text-white transition-colors">{l.label}</Link>
                 </li>
               ))}
             </ul>
@@ -139,6 +138,36 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* School portals */}
+        <div className="mb-10 sm:mb-12">
+          <h3 className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: GOLD }}>School portals</h3>
+          <div className="grid sm:grid-cols-2 gap-3">
+            {PORTALS.map(p => {
+              const Icon = portalIcon[p.key];
+              const live = isLive(p);
+              const inner = (
+                <>
+                  <span className="w-10 h-10 rounded-xl grid place-items-center flex-shrink-0" style={{ background: 'rgba(245,122,18,0.12)' }}>
+                    <Icon className="w-[18px] h-[18px]" style={{ color: GOLD }} />
+                  </span>
+                  <span className="min-w-0 flex-1">
+                    <span className="block text-sm font-semibold text-white/90 truncate">{p.name}</span>
+                    <span className="block text-[11.5px] text-white/40 truncate">{p.levels}</span>
+                  </span>
+                  {live
+                    ? <ArrowUpRight className="w-4 h-4 flex-shrink-0" style={{ color: GOLD }} />
+                    : <span className="text-[10px] font-bold px-2 py-1 rounded-full whitespace-nowrap flex-shrink-0" style={{ background: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.5)' }}>SOON</span>}
+                </>
+              );
+              const cls = 'card-hover flex items-center gap-3 rounded-2xl px-4 py-3.5';
+              const st = { background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.09)' };
+              return live
+                ? <a key={p.key} href={loginUrl(p)} target="_blank" rel="noreferrer" className={cls} style={st}>{inner}</a>
+                : <Link key={p.key} to={loginUrl(p)} className={cls} style={st}>{inner}</Link>;
+            })}
+          </div>
+        </div>
+
         {/* Install app */}
         <div className="mb-10 sm:mb-12">
           <InstallApp />
@@ -147,7 +176,7 @@ export default function Footer() {
         {/* Bottom bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-center sm:justify-between gap-4 text-xs text-white/30 text-center sm:text-left"
           style={{ borderTop: '1px solid rgba(255,255,255,0.07)' }}>
-          <p>&copy; {new Date().getFullYear()} Skuli UG · Smarter schools, better futures. Built in Uganda 🇺🇬</p>
+          <p>&copy; {new Date().getFullYear()} Skuli UG · Primary &amp; secondary schools. Built in Uganda 🇺🇬</p>
           <div className="flex items-center gap-4">
             <Link to="/terms" className="hover:text-white/70 transition-colors">Terms</Link>
             <Link to="/privacy" className="hover:text-white/70 transition-colors">Privacy</Link>

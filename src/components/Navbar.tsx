@@ -1,20 +1,24 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ArrowRight } from 'lucide-react';
+import { Menu, X, ArrowRight, Backpack, GraduationCap, ArrowUpRight } from 'lucide-react';
+import { PORTALS, isLive, loginUrl } from '../lib/portals';
+import { usePortalPicker } from '../lib/portalPickerContext';
 
 const GOLD = '#F57A12';
 const INK = '#07182F';
-const APP_URL = 'https://school.skuliug.com';
 
 const links = [
   { href: '/', label: 'Home' },
+  { href: '/systems', label: 'Our Systems' },
   { href: '/features', label: 'Features' },
   { href: '/e-learning', label: 'E-Learning' },
   { href: '/pricing', label: 'Pricing' },
   { href: '/about', label: 'About' },
   { href: '/contact', label: 'Contact' },
 ];
+
+const portalIcon = { primary: Backpack, secondary: GraduationCap } as const;
 
 export function SkuliMark({ size = 38 }: { size?: number }) {
   return (
@@ -36,7 +40,7 @@ export function SkuliLogo({ size = 38 }: { size?: number }) {
           Skuli <span style={{ color: GOLD }}>UG</span>
         </span>
         <span className="block text-[8.5px] tracking-[0.22em] uppercase font-semibold text-white/40">
-          Uganda School Management
+          Primary &amp; Secondary
         </span>
       </span>
     </Link>
@@ -47,6 +51,7 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { pathname } = useLocation();
+  const picker = usePortalPicker();
 
   useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 12);
@@ -69,15 +74,15 @@ export default function Navbar() {
         backdropFilter: scrolled ? 'blur(14px)' : 'none',
         borderBottom: scrolled ? '1px solid rgba(255,255,255,0.07)' : '1px solid transparent',
       }}>
-      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-[68px] flex items-center justify-between">
+      <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-[68px] flex items-center justify-between gap-3">
         <SkuliLogo />
 
         {/* Desktop links */}
-        <ul className="hidden md:flex items-center gap-1">
+        <ul className="hidden lg:flex items-center gap-0.5">
           {links.map(l => (
             <li key={l.href}>
               <Link to={l.href}
-                className="px-3.5 py-2 rounded-lg text-sm font-medium transition-all"
+                className="px-3 py-2 rounded-lg text-sm font-medium transition-all whitespace-nowrap"
                 style={{
                   color: pathname === l.href ? GOLD : 'rgba(255,255,255,0.7)',
                   background: pathname === l.href ? 'rgba(245,122,18,0.1)' : 'transparent',
@@ -89,17 +94,19 @@ export default function Navbar() {
         </ul>
 
         {/* CTA */}
-        <div className="hidden md:flex items-center gap-3">
-          <a href={`${APP_URL}/login`} className="text-sm font-medium text-white/60 hover:text-white transition-colors">Log in</a>
-          <a href={`${APP_URL}/login`}
-            className="btn-gold flex items-center gap-1.5 px-4 py-2.5 text-sm font-bold rounded-xl">
-            Get Started <ArrowRight className="w-4 h-4" />
-          </a>
+        <div className="hidden lg:flex items-center gap-3">
+          <button onClick={picker.open} className="text-sm font-medium text-white/60 hover:text-white transition-colors whitespace-nowrap">
+            Log in
+          </button>
+          <Link to="/contact"
+            className="btn-gold flex items-center gap-1.5 px-4 py-2.5 text-sm font-bold rounded-xl whitespace-nowrap">
+            Book a demo <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
 
         {/* Mobile hamburger */}
-        <button className="md:hidden p-2.5 -mr-1 rounded-lg text-white/90 active:scale-95 transition"
-          onClick={() => setOpen(o => !o)} aria-label="Toggle menu">
+        <button className="lg:hidden p-2.5 -mr-1 rounded-lg text-white/90 active:scale-95 transition"
+          onClick={() => setOpen(o => !o)} aria-label="Toggle menu" aria-expanded={open}>
           {open ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
       </nav>
@@ -112,7 +119,7 @@ export default function Navbar() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.18, ease: 'easeOut' }}
-            className="md:hidden"
+            className="lg:hidden max-h-[calc(100vh-4rem)] overflow-y-auto"
             style={{ background: 'rgba(11,34,66,0.98)', backdropFilter: 'blur(14px)', borderBottom: '1px solid rgba(255,255,255,0.08)' }}>
             <div className="px-4 pt-2 pb-6 space-y-1">
               {links.map(l => (
@@ -126,15 +133,41 @@ export default function Navbar() {
                   {pathname === l.href && <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: GOLD }} />}
                 </Link>
               ))}
+
               <div className="my-3" style={{ borderTop: '1px solid rgba(255,255,255,0.08)' }} />
-              <a href={`${APP_URL}/login`}
-                className="block text-center px-4 py-3.5 rounded-xl text-[15px] font-semibold text-white/90"
-                style={{ border: '1px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.04)' }}>
-                Log in to your school
-              </a>
-              <a href={`${APP_URL}/login`} className="btn-gold block text-center px-4 py-3.5 rounded-xl text-[15px] font-bold">
-                Get Started Free →
-              </a>
+
+              {/* Both portals, straight in the menu */}
+              <p className="px-1 pb-1 text-[10.5px] font-bold uppercase tracking-[0.18em] text-white/30">Log in to your school</p>
+              {PORTALS.map(p => {
+                const Icon = portalIcon[p.key];
+                const live = isLive(p);
+                const inner = (
+                  <>
+                    <span className="w-9 h-9 rounded-xl grid place-items-center flex-shrink-0"
+                      style={{ background: 'rgba(245,122,18,0.12)' }}>
+                      <Icon className="w-[18px] h-[18px]" style={{ color: GOLD }} />
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-[14.5px] font-semibold text-white/90 truncate">{p.name}</span>
+                      <span className="block text-[11.5px] text-white/40 truncate">{p.levels}</span>
+                    </span>
+                    {live
+                      ? <ArrowUpRight className="w-4 h-4 flex-shrink-0" style={{ color: GOLD }} />
+                      : <span className="text-[10px] font-bold px-2 py-1 rounded-full whitespace-nowrap flex-shrink-0"
+                          style={{ background: 'rgba(255,255,255,0.08)', color: 'rgba(255,255,255,0.5)' }}>SOON</span>}
+                  </>
+                );
+                const cls = 'flex items-center gap-3 px-3 py-3 rounded-xl';
+                const st = { border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.04)' };
+                return live
+                  ? <a key={p.key} href={loginUrl(p)} target="_blank" rel="noreferrer" className={cls} style={st}>{inner}</a>
+                  : <Link key={p.key} to={loginUrl(p)} className={cls} style={st}>{inner}</Link>;
+              })}
+
+              <Link to="/contact" className="btn-gold block text-center px-4 py-3.5 rounded-xl text-[15px] font-bold mt-2">
+                Book a free demo →
+              </Link>
+
               <div className="flex gap-2 pt-1">
                 <a href="tel:+256760730254" className="flex-1 flex items-center justify-center gap-2 px-3 py-3 rounded-xl text-sm font-semibold text-white/80" style={{ border: '1px solid rgba(255,255,255,0.1)', background: 'rgba(255,255,255,0.05)' }}>Call us</a>
                 <a href="https://wa.me/256760730254" className="flex-1 flex items-center justify-center gap-2 px-3 py-3 rounded-xl text-sm font-semibold" style={{ background: '#25D366', color: INK }}>WhatsApp</a>

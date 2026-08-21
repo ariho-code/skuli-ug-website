@@ -6,15 +6,20 @@ import { useInView } from 'react-intersection-observer';
 import {
   FileText, TrendingUp, DollarSign, BookOpen, BarChart3, UserCheck,
   Smartphone, Brain, Shield, ArrowRight, Phone, Check, Plus,
-  Timer, FileX2, Sparkles, MessageCircle,
+  Timer, FileX2, Sparkles, MessageCircle, Backpack, GraduationCap,
+  ArrowUpRight, LockKeyhole, LogIn,
 } from 'lucide-react';
 import Seo from '../lib/seo';
 import { faqJsonLd } from '../lib/jsonld';
 import {
   FadeIn, Rise, RotatingWord,
   GOLD, GOLD_DEEP, INK, INK2, INK3, CREAM,
-  APP_URL, PHONE1, PHONE2, goldGrad, goldTile,
+  PHONE1, PHONE2, goldGrad, goldTile,
 } from '../lib/theme';
+import { PRIMARY, SECONDARY, isLive, loginUrl } from '../lib/portals';
+import type { Portal } from '../lib/portals';
+import { usePortalPicker } from '../lib/portalPickerContext';
+import TrustedBy from '../components/TrustedBy';
 
 const EASE = [0.22, 1, 0.36, 1] as const;
 
@@ -70,55 +75,110 @@ const stats = [
   { Icon: Timer, to: 3, suffix: 'x', label: 'Faster report cards', sub: 'End-of-term reports in minutes, not weekends' },
   { Icon: Smartphone, to: 100, suffix: '%', label: 'Mobile ready', sub: 'Runs on any Android or iPhone, on mobile data' },
   { Icon: FileX2, to: 0, suffix: '', label: 'Excel files needed', sub: 'No spreadsheets, no manual tallying, ever' },
-  { Icon: Sparkles, text: 'AI', label: 'Comments written for you', sub: 'A personalised comment for every pupil, every term' },
+  { Icon: Backpack, to: 2, suffix: '', label: 'School systems', sub: 'One built for P1 – P7, one for S1 – S6' },
 ];
 
 const features = [
-  { Icon: FileText, title: 'Smart report cards', desc: 'Teachers enter marks and the system writes a personalised comment for every pupil, then lays out the full report card.' },
-  { Icon: TrendingUp, title: 'Mark sheets & grades', desc: 'Record performance per subject. Aggregates and class positions are calculated instantly.' },
-  { Icon: DollarSign, title: 'Fees tracking', desc: 'See paid, owing and outstanding per pupil. Instant fee reports any time, on any phone.' },
-  { Icon: BookOpen, title: 'E-learning', desc: 'Share notes, lessons and assignments with your pupils digitally, in term time and holidays alike.' },
-  { Icon: BarChart3, title: 'Analytics dashboard', desc: 'Class averages, top performers and term-on-term trends at a glance.' },
-  { Icon: UserCheck, title: 'Teacher accounts', desc: 'Each teacher logs in and sees only their class. Secure, role-based and mobile-ready.' },
+  { Icon: FileText, title: 'Smart report cards', desc: 'Teachers enter marks and the system writes a personalised comment for every learner, then lays out the full report card: aggregates and divisions at primary, principal passes and points at secondary.' },
+  { Icon: TrendingUp, title: 'Mark sheets & grades', desc: 'Record performance per subject. Grades, aggregates and class positions are calculated instantly against the right scale for the level.' },
+  { Icon: DollarSign, title: 'Fees tracking', desc: 'See paid, owing and outstanding per learner. Termly primary fees or boarding and requirements at secondary, on any phone.' },
+  { Icon: BookOpen, title: 'E-learning', desc: 'Share notes, lessons and assignments digitally, in term time and holidays alike, by class at primary and by subject at secondary.' },
+  { Icon: BarChart3, title: 'Analytics dashboard', desc: 'Class averages, top performers and term-on-term trends at a glance, per stream, per subject and per combination.' },
+  { Icon: UserCheck, title: 'Teacher accounts', desc: 'Class teachers at primary, subject teachers at secondary. Each one logs in and sees only what they teach.' },
 ];
 
 const steps = [
-  { n: '01', title: 'We come to you', desc: 'Book a free demo and our team visits your school to set everything up: classes, pupils and teacher accounts.' },
+  { n: '01', title: 'We come to you', desc: 'Book a free demo and our team visits your school to set everything up: classes or streams, learners and teacher accounts, on the system that matches your level.' },
   { n: '02', title: 'Teachers enter marks', desc: 'On their own phones. The familiar way, but digital. No training headaches, no computer lab.' },
   { n: '03', title: 'Print & share instantly', desc: 'Report cards, fee statements and analytics ready in seconds, with the comments already written.' },
 ];
 
 const plans = [
-  { name: 'Starter', sub: 'Under 150 pupils', price: '150,000', usd: '$40', hl: false, badge: null, f: ['Report cards & mark sheets', 'Fees tracking', 'Up to 5 teacher accounts', 'Mobile access'] },
-  { name: 'Growth', sub: '150 – 400 pupils', price: '300,000', usd: '$80', hl: false, badge: null, f: ['Everything in Starter', 'E-learning module', 'AI report comments', 'Analytics dashboard', 'Up to 20 teachers'] },
-  { name: 'Pro', sub: '400 – 800 pupils', price: '500,000', usd: '$130', hl: false, badge: null, f: ['Everything in Growth', 'Parent SMS alerts', 'Advanced analytics', 'Unlimited teachers', 'Priority support'] },
-  { name: 'Enterprise', sub: '800+ pupils', price: '800,000+', usd: '$210+', hl: true, badge: 'Most popular', f: ['Everything in Pro', 'Custom school branding', 'Multi-campus support', 'Dedicated onboarding'] },
+  { name: 'Starter', sub: 'Under 150 learners', price: '150,000', usd: '$40', hl: false, badge: null, f: ['Report cards & mark sheets', 'Fees tracking', 'Up to 5 teacher accounts', 'Mobile access'] },
+  { name: 'Growth', sub: '150 – 400 learners', price: '300,000', usd: '$80', hl: false, badge: null, f: ['Everything in Starter', 'E-learning module', 'AI report comments', 'Analytics dashboard', 'Up to 20 teachers'] },
+  { name: 'Pro', sub: '400 – 800 learners', price: '500,000', usd: '$130', hl: false, badge: null, f: ['Everything in Growth', 'Parent SMS alerts', 'Advanced analytics', 'Unlimited teachers', 'Priority support'] },
+  { name: 'Enterprise', sub: '800+ learners', price: '800,000+', usd: '$210+', hl: true, badge: 'Most popular', f: ['Everything in Pro', 'Custom school branding', 'Primary + secondary in one account', 'Dedicated onboarding'] },
 ];
 
 const whySkuli = [
   { Icon: Smartphone, title: 'Mobile first', desc: 'Runs on any Android or iPhone on mobile data. No WiFi, no computer lab required.' },
+  { Icon: GraduationCap, title: 'Built twice, on purpose', desc: 'A primary system and a secondary system, each matched to its own curriculum, grading and report card. Never one template stretched over both.' },
   { Icon: Brain, title: 'AI built in', desc: 'Personalised comments are drafted for every pupil. Teachers enter marks and the system handles the rest.' },
   { Icon: Shield, title: 'Secure & private', desc: 'Role-based access. Each teacher sees only what they need. Your data stays yours.' },
 ];
 
 const faqs = [
+  { q: 'Do you handle secondary schools, or only primary?', a: 'Both. Skuli runs two separate systems: Skuli Primary for Nursery to P7, and Skuli Secondary for S1 to S6 across O-Level and A-Level. They share the same fees, e-learning, AI and analytics, but each has its own grading, subjects and report card format. Schools that run both sections get both systems under one account.' },
   { q: 'Do teachers need laptops or a computer lab?', a: 'No. Skuli runs on any Android phone or iPhone using mobile data. Teachers enter marks from the phone already in their pocket. No laptops, no lab required.' },
   { q: 'How much does it cost?', a: 'One flat termly fee based on your school size, starting at UGX 150,000 per term. No per-teacher fees and no hidden charges. You pay three times a year, and that’s it.' },
   { q: 'Will it work with MTN and Airtel?', a: 'Yes. Skuli is built to work on Uganda’s mobile networks, and parent SMS alerts (coming soon) are designed for both MTN and Airtel.' },
-  { q: 'How do we get started?', a: 'Book a free demo. Our team comes to your school, sets up your classes, pupils and teacher accounts, and shows everyone how it works, usually within a day.' },
+  { q: 'How do we get started?', a: 'Book a free demo. Our team comes to your school, sets up your classes or streams, your learners and your teacher accounts, and shows everyone how it works, usually within a day.' },
   { q: 'Is our school data safe?', a: 'Yes. Access is role-based, so each teacher only sees their own class. Your school’s data stays private and belongs to you.' },
 ];
 
 
 /* ---------------- page ---------------- */
+/* A compact primary/secondary card for the home page. */
+function SystemTile({ portal, index }: { portal: Portal; index: number }) {
+  const live = isLive(portal);
+  const Icon = portal.key === 'primary' ? Backpack : GraduationCap;
+  const href = loginUrl(portal);
+
+  const inner = (
+    <>
+      <div className="flex items-start justify-between gap-3 mb-5">
+        <div className="w-12 h-12 rounded-2xl grid place-items-center" style={{ background: goldTile }}>
+          <Icon className="w-6 h-6" style={{ color: GOLD }} strokeWidth={2} />
+        </div>
+        <span className="px-2.5 py-1 rounded-full text-[10.5px] font-bold tracking-wide whitespace-nowrap"
+          style={live
+            ? { background: 'rgba(16,185,129,0.15)', color: '#34d399' }
+            : { background: 'rgba(245,122,18,0.14)', color: GOLD }}>
+          {live ? 'LIVE NOW' : 'ROLLING OUT'}
+        </span>
+      </div>
+      <h3 className="font-display font-extrabold text-xl sm:text-2xl text-white">{portal.name}</h3>
+      <p className="text-[12.5px] font-semibold mt-1.5" style={{ color: GOLD }}>{portal.levels}</p>
+      <p className="text-[14.5px] text-white/55 leading-relaxed mt-3.5 mb-5">{portal.audience}</p>
+      <ul className="space-y-2 mb-6 flex-1">
+        {portal.highlights.slice(0, 3).map(h => (
+          <li key={h} className="flex items-start gap-2.5 text-[13.5px] text-white/60 leading-snug">
+            <span className="mt-[3px] w-4 h-4 rounded-full grid place-items-center flex-shrink-0" style={{ background: 'rgba(245,122,18,0.15)' }}>
+              <Check className="w-2.5 h-2.5" style={{ color: GOLD }} strokeWidth={3.5} />
+            </span>
+            {h}
+          </li>
+        ))}
+      </ul>
+      <span className="mt-auto inline-flex items-center gap-2 text-sm font-bold" style={{ color: live ? GOLD : 'rgba(255,255,255,0.6)' }}>
+        {live
+          ? <>Open the {portal.short.toLowerCase()} portal <ArrowUpRight className="w-4 h-4" /></>
+          : <><LockKeyhole className="w-3.5 h-3.5" /> Request early access</>}
+      </span>
+    </>
+  );
+
+  const cls = 'card-hover rounded-[1.75rem] p-6 sm:p-8 h-full flex flex-col text-left';
+  const st = { background: 'rgba(255,255,255,0.035)', border: '1px solid rgba(255,255,255,0.09)' };
+
+  return (
+    <FadeIn delay={index * 0.09} className="h-full">
+      {live
+        ? <a href={href} target="_blank" rel="noreferrer" className={cls} style={st}>{inner}</a>
+        : <Link to={href} className={cls} style={st}>{inner}</Link>}
+    </FadeIn>
+  );
+}
+
 export default function HomePage() {
   const [openFaq, setOpenFaq] = useState<number>(0);
+  const picker = usePortalPicker();
 
   return (
     <div style={{ background: INK, color: '#fff' }}>
       <Seo
-        title="Skuli UG | School Management System for Uganda"
-        description="Skuli UG is Uganda's all-in-one school management system. Report cards, fees, e-learning and AI report comments, all on your teachers' phones. Termly pricing from UGX 150,000."
+        title="Skuli UG | School Management System for Primary & Secondary Schools in Uganda"
+        description="Skuli UG runs two school systems on one platform: Skuli Primary for Nursery to P7 and Skuli Secondary for S1 to S6. Report cards, fees, e-learning and AI comments, all on your teachers' phones. From UGX 150,000 per term."
         path="/"
         jsonLd={faqJsonLd(faqs)}
       />
@@ -135,6 +195,13 @@ export default function HomePage() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-[1.05fr_0.95fr] gap-10 lg:gap-8 items-center w-full">
           {/* copy */}
           <div>
+            <FadeIn>
+              <Link to="/systems" className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[11.5px] font-bold tracking-wide mb-6 transition-colors hover:bg-white/5"
+                style={{ background: 'rgba(245,122,18,0.1)', border: '1px solid rgba(245,122,18,0.25)', color: GOLD }}>
+                <Sparkles className="w-3.5 h-3.5" /> NOW RUNNING PRIMARY &amp; SECONDARY
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </FadeIn>
             <h1 className="font-display font-extrabold tracking-tight leading-[1.04] mb-6" style={{ fontSize: 'clamp(2.5rem,7vw,4.6rem)' }}>
               <HeroLine index={0}>Your school.</HeroLine>
               <HeroLine index={1}><span className="gold-text">Fully digital.</span></HeroLine>
@@ -142,26 +209,30 @@ export default function HomePage() {
             </h1>
             <FadeIn delay={0.45}>
               <p className="text-pretty text-white/65 mb-5 max-w-xl" style={{ fontSize: 'clamp(1rem,1.6vw,1.2rem)', lineHeight: 1.65 }}>
-                The all-in-one school management system built for Uganda's primary schools.
+                Two purpose-built systems, one platform: <span className="text-white/90 font-semibold">Skuli Primary</span> for Nursery to P7
+                and <span className="text-white/90 font-semibold">Skuli Secondary</span> for S1 to S6.
                 Report cards, fees, e-learning and AI, all on your teachers' phones.{' '}
                 <span className="text-white/90 font-semibold">No laptops. No Excel. No stress.</span>
               </p>
               <p className="text-white/45 mb-8 text-[15px] sm:text-base">
                 One platform to manage{' '}
                 <span className="gold-text font-semibold">
-                  <RotatingWord words={['students', 'fees', 'academics', 'e-learning', 'parents', 'report cards']} />
+                  <RotatingWord words={['pupils', 'students', 'fees', 'academics', 'e-learning', 'report cards']} />
                 </span>
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 mb-8">
-                <a href={`${APP_URL}/login`} className="btn-gold flex items-center justify-center gap-2 px-7 py-4 rounded-2xl font-bold text-[15px]">
+              <div className="flex flex-col sm:flex-row gap-3 mb-5">
+                <Link to="/contact" className="btn-gold flex items-center justify-center gap-2 px-7 py-4 rounded-2xl font-bold text-[15px]">
                   Book a free demo <ArrowRight className="w-4 h-4" />
-                </a>
-                <a href={`tel:${PHONE1.replace(/\s/g, '')}`} className="btn-ghost flex items-center justify-center gap-2 px-7 py-4 rounded-2xl font-semibold text-[15px] text-white" style={{ border: '1px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.06)' }}>
-                  <Phone className="w-4 h-4" style={{ color: GOLD }} /> {PHONE1}
-                </a>
+                </Link>
+                <button onClick={picker.open} className="btn-ghost flex items-center justify-center gap-2 px-7 py-4 rounded-2xl font-semibold text-[15px] text-white" style={{ border: '1px solid rgba(255,255,255,0.15)', background: 'rgba(255,255,255,0.06)' }}>
+                  <LogIn className="w-4 h-4" style={{ color: GOLD }} /> Log in to your school
+                </button>
               </div>
+              <a href={`tel:${PHONE1.replace(/\s/g, '')}`} className="inline-flex items-center gap-2 mb-7 text-[15px] font-semibold text-white/70 hover:text-white transition-colors">
+                <Phone className="w-4 h-4" style={{ color: GOLD }} /> {PHONE1}
+              </a>
               <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-[13px] text-white/45">
-                {['Works on any phone', 'MTN & Airtel ready', 'Set up in a day'].map(t => (
+                {['Primary & secondary', 'Works on any phone', 'Set up in a day'].map(t => (
                   <span key={t} className="flex items-center gap-1.5"><Check className="w-4 h-4" style={{ color: GOLD }} /> {t}</span>
                 ))}
               </div>
@@ -198,13 +269,46 @@ export default function HomePage() {
                     <s.Icon className="w-[22px] h-[22px]" style={{ color: GOLD }} strokeWidth={2} />
                   </div>
                   <div className="font-display font-extrabold gold-text leading-none" style={{ fontSize: 'clamp(2.1rem,4.5vw,3.1rem)' }}>
-                    {'text' in s ? s.text : <CountUp to={s.to as number} suffix={s.suffix} />}
+                    <CountUp to={s.to} suffix={s.suffix} />
                   </div>
                   <p className="font-display font-bold text-white text-[15px] sm:text-base mt-2">{s.label}</p>
                   <p className="text-[13px] text-white/45 leading-snug mt-1">{s.sub}</p>
                 </div>
               </FadeIn>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Two systems */}
+      <section className="py-20 sm:py-28 relative overflow-hidden" style={{ background: `linear-gradient(180deg, ${INK}, ${INK2})` }}>
+        <div className="absolute inset-0 grid-bg opacity-50 pointer-events-none" />
+        <div className="grain" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-10 lg:gap-14 items-start mb-12">
+            <div>
+              <Rise>
+                <p className="text-[11px] font-bold uppercase tracking-[0.2em] mb-3" style={{ color: GOLD }}>Primary &amp; secondary</p>
+                <h2 className="font-display font-extrabold tracking-tight text-balance" style={{ fontSize: 'clamp(2rem,4.5vw,3.2rem)', lineHeight: 1.05 }}>
+                  A P5 report card is not<br className="hidden sm:block" /> an <span className="gold-text">S6 transcript</span>
+                </h2>
+              </Rise>
+            </div>
+            <FadeIn delay={0.15}>
+              <p className="text-white/60 text-[16.5px] leading-relaxed text-pretty mb-4">
+                So we did not force them into one template. Skuli runs two purpose-built systems: one that thinks in aggregates
+                and divisions, and one that thinks in combinations, principal passes and points. Underneath, they share the same
+                fees engine, the same e-learning, the same AI and the same support team.
+              </p>
+              <Link to="/systems" className="inline-flex items-center gap-2 text-[15px] font-bold hover:gap-3 transition-all" style={{ color: GOLD }}>
+                See exactly what differs between them <ArrowRight className="w-4 h-4" />
+              </Link>
+            </FadeIn>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-4 sm:gap-5">
+            <SystemTile portal={PRIMARY} index={0} />
+            <SystemTile portal={SECONDARY} index={1} />
           </div>
         </div>
       </section>
@@ -217,7 +321,7 @@ export default function HomePage() {
               <h2 className="font-display font-extrabold tracking-tight text-balance" style={{ fontSize: 'clamp(2rem,4.5vw,3.2rem)', lineHeight: 1.05 }}>One phone. Your whole school.</h2>
             </Rise>
             <FadeIn delay={0.15}>
-              <p className="mt-4 text-lg text-pretty" style={{ color: 'rgba(12,44,87,0.55)' }}>Everything a Ugandan primary school needs to run, built to work on the phone already in your teachers' pockets.</p>
+              <p className="mt-4 text-lg text-pretty" style={{ color: 'rgba(12,44,87,0.55)' }}>Everything a Ugandan school needs to run, primary or secondary, built to work on the phone already in your teachers' pockets.</p>
             </FadeIn>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
@@ -356,9 +460,14 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Trusted by */}
+      <section className="py-20 sm:py-28" style={{ background: INK }}>
+        <TrustedBy tone="dark" />
+      </section>
+
       {/* Why Skuli */}
       <section className="py-20 sm:py-24" style={{ background: INK2 }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-3 gap-5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
           {whySkuli.map((item, i) => (
             <FadeIn key={item.title} delay={i * 0.1}>
               <div className="card-hover rounded-3xl p-7 h-full" style={{ background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.07)' }}>
