@@ -5,17 +5,17 @@ import Seo from '../lib/seo';
 import { breadcrumbJsonLd } from '../lib/jsonld';
 
 const features = [
-  { icon: Upload, title: 'Share lesson notes', desc: 'Upload PDFs, Word documents, images and videos. Pupils access everything from their phones.' },
+  { icon: Upload, title: 'Share lesson notes', desc: 'Upload PDFs, Word documents, images and videos. Learners access everything from their phones.' },
   { icon: FileText, title: 'Digital assignments', desc: 'Set homework digitally. Pupils submit online. Teachers mark and return feedback without paper.' },
   { icon: MessageSquare, title: 'Discussion boards', desc: 'Class-level discussions where teachers guide learning and pupils ask questions.' },
   { icon: BookOpen, title: 'Lesson library', desc: 'All lessons organised by subject and topic. Pupils catch up at any time, even during holidays.' },
   { icon: Award, title: 'Progress tracking', desc: 'Teachers see which pupils have viewed materials and submitted assignments.' },
-  { icon: Users, title: 'Class groups', desc: 'Each class has its own e-learning space. Teachers only manage their assigned classes.' },
+  { icon: Users, title: 'Class & subject groups', desc: 'Each primary class and each secondary subject stream gets its own space. Teachers only manage what they are assigned.' },
 ];
 
 const steps = [
   { n: '01', title: 'Teacher uploads materials', desc: 'Notes, PDFs or videos uploaded from any smartphone in seconds.' },
-  { n: '02', title: 'Pupils access on their phones', desc: 'Students open the Skuli UG app on their phone and see new lessons immediately.' },
+  { n: '02', title: 'Learners access on their phones', desc: 'Students open the Skuli UG app on their phone and see new lessons immediately.' },
   { n: '03', title: 'Assignments set and submitted', desc: 'Teachers post assignments. Pupils submit online. No printing, no lost exercise books.' },
   { n: '04', title: 'Teachers mark and give feedback', desc: 'Feedback returned digitally. Marks recorded in the grade book automatically.' },
 ];
@@ -32,7 +32,7 @@ export default function ElearningPage() {
     <div style={{ background: INK, color: '#fff' }}>
       <Seo
         title="E-Learning Module | Notes, Assignments & Feedback | Skuli UG"
-        description="Skuli UG's e-learning module lets teachers share notes, set assignments and give feedback from their phones, so learning never stops when school closes."
+        description="Skuli UG's e-learning module lets teachers share notes, set assignments and give feedback from their phones, in both the primary and secondary systems, so learning never stops when school closes."
         path="/e-learning"
         jsonLd={breadcrumbJsonLd([{ name: 'Home', path: '/' }, { name: 'E-Learning', path: '/e-learning' }])}
       />
@@ -52,7 +52,7 @@ export default function ElearningPage() {
             </Rise>
             <FadeIn delay={0.15}>
             <p className="text-pretty text-white/60 mb-8 max-w-xl" style={{ fontSize: 'clamp(1rem,1.6vw,1.15rem)', lineHeight: 1.65 }}>
-              Skuli UG's built-in e-learning module lets teachers share notes, set assignments and give feedback, all from their smartphones. Pupils access everything without a computer.
+              Skuli UG's built-in e-learning module lets teachers share notes, set assignments and give feedback, all from their smartphones. Included in both Skuli Primary and Skuli Secondary, and learners access everything without a computer.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
               <Link to="/contact" className="btn-gold flex items-center justify-center gap-2 px-7 py-4 rounded-2xl font-bold text-[15px]">
@@ -107,7 +107,7 @@ export default function ElearningPage() {
         <div className="absolute top-1/2 left-1/2 w-[700px] h-[700px] rounded-full pointer-events-none" style={{ transform: 'translate(-50%,-50%)', background: 'radial-gradient(circle, rgba(245,122,18,.07), transparent 70%)' }} />
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <Rise className="text-center max-w-2xl mx-auto mb-14">
-            <h2 className="font-display font-extrabold tracking-tight text-balance" style={{ fontSize: 'clamp(2rem,4.5vw,3rem)', lineHeight: 1.05 }}>From teacher to pupil in 4 steps</h2>
+            <h2 className="font-display font-extrabold tracking-tight text-balance" style={{ fontSize: 'clamp(2rem,4.5vw,3rem)', lineHeight: 1.05 }}>From teacher to learner in 4 steps</h2>
           </Rise>
           <div className="space-y-4">
             {steps.map((s, i) => (

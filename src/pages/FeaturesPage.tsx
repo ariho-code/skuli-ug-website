@@ -12,24 +12,25 @@ const modules = [
   {
     category: 'Academics',
     items: [
-      { icon: FileText, title: 'AI Report Cards', desc: 'Generate personalised pupil report cards with comments written for you. Enter the marks and the system does the writing.', badge: 'AI' },
-      { icon: TrendingUp, title: 'Mark Sheets & Grade Books', desc: 'Digital mark entry per subject per class. Automatic aggregates, positions and grade labels calculated instantly.' },
+      { icon: FileText, title: 'AI Report Cards', desc: 'Generate personalised report cards with comments written for you. Primary reports carry aggregates and divisions; secondary reports carry grades, principal passes and points.', badge: 'AI' },
+      { icon: TrendingUp, title: 'Mark Sheets & Grade Books', desc: 'Digital mark entry per subject, per class or per stream. Aggregates, positions and grade labels calculated instantly on the right scale for the level.' },
       { icon: Calendar, title: 'Timetable Management', desc: 'Build and publish class timetables. Teachers see their schedule on their phone every day.' },
-      { icon: UserCheck, title: 'Student Promotion', desc: 'Review academic performance and promote students to the next class at end of term automatically.' },
+      { icon: UserCheck, title: 'Student Promotion', desc: 'Review performance and promote learners at end of year: P1 through P7 at primary, S1 to S4 and S5 to S6 by combination at secondary.' },
+      { icon: Layers, title: 'Subject Combinations', desc: 'A-Level combinations and optional subjects per learner, with subsidiaries handled properly. Secondary only.', badge: 'S5 – S6' },
     ],
   },
   {
     category: 'Students & Classes',
     items: [
-      { icon: Users, title: 'Student Management', desc: 'Complete digital register for every pupil. Admission details, photos, medical notes and contacts all in one place.' },
-      { icon: Layers, title: 'Class & Stream Setup', desc: 'Manage class levels, streams and teacher assignments. Works for Nursery, Primary and O-Level schools.' },
+      { icon: Users, title: 'Student Management', desc: 'Complete digital register for every learner. Admission details, photos, medical notes and contacts all in one place, and a P7 leaver can carry straight into your S1.' },
+      { icon: Layers, title: 'Class & Stream Setup', desc: 'Manage class levels, streams and teacher assignments across Nursery, Primary, O-Level and A-Level.' },
       { icon: Clock, title: 'Academic Year & Terms', desc: 'Configure academic years and terms. The system tracks current term automatically.' },
     ],
   },
   {
     category: 'Fees & Finance',
     items: [
-      { icon: DollarSign, title: 'Fee Structures & Invoicing', desc: 'Set up fee items per term. Auto-generate invoices per pupil. Track paid and outstanding amounts instantly.' },
+      { icon: DollarSign, title: 'Fee Structures & Invoicing', desc: 'Set up fee items per term, including boarding and requirements at secondary. Auto-generate invoices per learner and track paid and outstanding amounts instantly.' },
       { icon: BarChart3, title: 'Financial Reports', desc: 'See total collected, outstanding balances and defaulters per class or school-wide. Export to PDF.' },
     ],
   },
@@ -52,6 +53,7 @@ const modules = [
     items: [
       { icon: Brain, title: 'Skuli AI', desc: 'Built-in AI assistant that helps teachers write comments, answers questions about the system and provides insights.' },
       { icon: Smartphone, title: 'Mobile First', desc: 'Works on any Android or iPhone. No computer lab needed. Teachers use their own phones.' },
+      { icon: Award, title: 'Two Systems, One Platform', desc: 'Skuli Primary and Skuli Secondary share this entire module list. Schools running both sections get both under one account.' },
       { icon: Shield, title: 'Role-Based Security', desc: 'Each staff member sees only what they need. Headteachers, teachers and bursars all get the right level of access.' },
     ],
   },
@@ -67,7 +69,7 @@ export default function FeaturesPage() {
     <div style={{ background: INK, color: '#fff' }}>
       <Seo
         title="Features | Report Cards, Fees, E-Learning & AI | Skuli UG"
-        description="Explore every Skuli UG module: AI report cards, mark sheets, fee tracking, e-learning, timetables and staff chat, built for Ugandan primary schools."
+        description="Explore every Skuli UG module: AI report cards, mark sheets, fee tracking, e-learning, timetables and staff chat, built for Ugandan primary and secondary schools."
         path="/features"
         jsonLd={breadcrumbJsonLd([{ name: 'Home', path: '/' }, { name: 'Features', path: '/features' }])}
       />
@@ -86,7 +88,8 @@ export default function FeaturesPage() {
           </Rise>
           <FadeIn delay={0.15}>
             <p className="text-pretty text-white/60 mx-auto mb-8 max-w-2xl" style={{ fontSize: 'clamp(1rem,1.6vw,1.15rem)', lineHeight: 1.65 }}>
-              Every module a modern Ugandan primary school needs, from student admissions to report cards, on one platform.
+              Every module a modern Ugandan school needs, from admissions to report cards, on one platform. The same list runs on{' '}
+              <Link to="/systems" className="font-semibold underline decoration-2 underline-offset-4" style={{ color: GOLD, textDecorationColor: 'rgba(245,122,18,0.4)' }}>both Skuli Primary and Skuli Secondary</Link>.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <Link to="/contact" className="btn-gold flex items-center justify-center gap-2 px-7 py-4 rounded-2xl font-bold text-[15px]">

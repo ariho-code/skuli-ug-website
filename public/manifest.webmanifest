@@ -1,7 +1,7 @@
 {
   "name": "Skuli UG — School Management System",
   "short_name": "Skuli UG",
-  "description": "Uganda's all-in-one school management platform. Report cards, fees, e-learning and AI — all on your teachers' phones.",
+  "description": "Uganda's all-in-one school management platform for primary and secondary schools. Report cards, fees, e-learning and AI — all on your teachers' phones.",
   "start_url": "/?source=pwa",
   "id": "/?source=pwa",
   "scope": "/",

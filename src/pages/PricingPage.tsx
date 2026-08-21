@@ -7,13 +7,13 @@ import Seo, { SITE_URL } from '../lib/seo';
 import { breadcrumbJsonLd, faqJsonLd } from '../lib/jsonld';
 
 const plans = [
-  { name: 'Starter', sub: 'Under 150 pupils', price: '150,000', usd: '$40', hl: false, badge: null, f: ['Report cards & mark sheets', 'Fees tracking & invoicing', 'Up to 5 teacher accounts', 'Mobile app access', 'Email support'] },
-  { name: 'Growth', sub: '150 – 400 pupils', price: '300,000', usd: '$80', hl: false, badge: null, f: ['Everything in Starter', 'E-learning module', 'AI report comments', 'Analytics dashboard', 'Up to 20 teachers', 'Priority support'] },
-  { name: 'Pro', sub: '400 – 800 pupils', price: '500,000', usd: '$130', hl: false, badge: null, f: ['Everything in Growth', 'Parent SMS alerts', 'Timetable management', 'Advanced analytics', 'Unlimited teachers', 'Dedicated account manager'] },
-  { name: 'Enterprise', sub: '800+ pupils / multi-campus', price: '800,000+', usd: '$210+', hl: true, badge: 'Most popular', f: ['Everything in Pro', 'Custom school branding', 'Multi-campus support', 'API access', 'On-site onboarding', '24/7 support'] },
+  { name: 'Starter', sub: 'Under 150 learners', price: '150,000', usd: '$40', hl: false, badge: null, f: ['Report cards & mark sheets', 'Fees tracking & invoicing', 'Up to 5 teacher accounts', 'Mobile app access', 'Email support'] },
+  { name: 'Growth', sub: '150 – 400 learners', price: '300,000', usd: '$80', hl: false, badge: null, f: ['Everything in Starter', 'E-learning module', 'AI report comments', 'Analytics dashboard', 'Up to 20 teachers', 'Priority support'] },
+  { name: 'Pro', sub: '400 – 800 learners', price: '500,000', usd: '$130', hl: false, badge: null, f: ['Everything in Growth', 'Parent SMS alerts', 'Timetable management', 'Advanced analytics', 'Unlimited teachers', 'Dedicated account manager'] },
+  { name: 'Enterprise', sub: '800+ learners / primary + secondary', price: '800,000+', usd: '$210+', hl: true, badge: 'Most popular', f: ['Everything in Pro', 'Custom school branding', 'Primary + secondary in one account', 'API access', 'On-site onboarding', '24/7 support'] },
 ];
 
-const customFeatures = ['Your school branding & colors', 'Custom report card formats', 'Your fee structure logic', 'EMIS integration ready', 'Multi-school / network support', 'Full source code option'];
+const customFeatures = ['Your school branding & colors', 'Custom report card formats', 'Your fee structure logic', 'EMIS integration ready', 'Primary + secondary under one group', 'Full source code option'];
 
 const faqs = [
   { q: 'How often do I pay?', a: 'You pay once per school term, three times per year. No monthly subscriptions, no per-teacher fees.' },
@@ -21,6 +21,8 @@ const faqs = [
   { q: 'What happens if my school grows?', a: 'Simply upgrade to the next plan at the start of the following term. We pro-rate the difference if needed.' },
   { q: 'Is there a free trial?', a: 'Yes. We offer a 14-day free trial for all new schools. No credit card needed. Book a demo and we set you up.' },
   { q: 'Do teachers need a computer?', a: 'No. Skuli UG is fully mobile-first. It works on any Android or iPhone on mobile data.' },
+  { q: 'We run a primary and a secondary section. Do we pay twice?', a: 'No. You pay once, on the band that matches your combined enrolment, and you get both Skuli Primary and Skuli Secondary under one account and one termly invoice. Each headteacher and their teachers still see only their own section.' },
+  { q: 'Is secondary priced differently from primary?', a: 'No. The bands are the same and they are based on how many learners you have, not on which system you run. A 300-student secondary school pays the same as a 300-pupil primary school.' },
   { q: 'What is the Custom Build option?', a: 'We build bespoke school management systems tailored to your workflow, branding and specific requirements. Contact us for a quote.' },
 ];
 
@@ -28,7 +30,7 @@ const plansJsonLd = {
   '@context': 'https://schema.org',
   '@type': 'Product',
   name: 'Skuli UG School Management System',
-  description: 'Termly subscription plans for Ugandan primary schools. No per-teacher fees, no hidden charges.',
+  description: 'Termly subscription plans for Ugandan primary and secondary schools. No per-teacher fees, no hidden charges.',
   brand: { '@type': 'Brand', name: 'Skuli UG' },
   offers: plans.map(p => ({
     '@type': 'Offer',
@@ -48,7 +50,7 @@ export default function PricingPage() {
     <div style={{ background: INK, color: '#fff' }}>
       <Seo
         title="Pricing | Termly Plans from UGX 150,000 | Skuli UG"
-        description="Simple, transparent termly pricing for Ugandan schools. No per-teacher fees, no hidden charges. Plans from UGX 150,000 per term. Compare Starter, Growth, Pro and Enterprise."
+        description="Simple, transparent termly pricing for Ugandan primary and secondary schools. No per-teacher fees, no hidden charges. Plans from UGX 150,000 per term. Compare Starter, Growth, Pro and Enterprise."
         path="/pricing"
         jsonLd={[
           breadcrumbJsonLd([{ name: 'Home', path: '/' }, { name: 'Pricing', path: '/pricing' }]),
@@ -72,6 +74,7 @@ export default function PricingPage() {
           <FadeIn delay={0.15}>
             <p className="text-pretty text-white/60 mx-auto max-w-2xl" style={{ fontSize: 'clamp(1rem,1.6vw,1.15rem)', lineHeight: 1.65 }}>
               No per-teacher fees. No hidden monthly charges. One flat payment per term, based on your school size. Three terms a year, and that's all you pay.
+              The same bands apply whether you run a primary, a secondary, or both.
             </p>
           </FadeIn>
         </div>
